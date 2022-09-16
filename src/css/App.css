@@ -96,6 +96,7 @@
 
 .slots {
     max-width: 650px;
+    height: 300px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -107,7 +108,6 @@
     padding-bottom: 25px;
     padding-left: 30px;
     padding-right: 10px;
-
 }
 
 .Button {
@@ -144,12 +144,12 @@
     border-radius: 5px;
     background-color: #2F80ED;
     width: 200px;
-    height: 50px;
     margin-top: 150px;
     margin-left: 475px;
     padding-left: 10px;
     color: #FFFFFF;
     border-style: none;
+    height: 50px;
 }
 .Book p {
     margin-right: 10px;
