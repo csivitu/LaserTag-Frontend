@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react'
 import './css/App.css'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Book } from '@mui/icons-material';
 
 const SlotBooking = () => {
     const [show, setShow] = useState(false);

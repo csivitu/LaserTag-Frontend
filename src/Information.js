@@ -1,5 +1,6 @@
 import './css/App.css';
 import SlotBooking from './SlotBooking';
+import TeamDetails from './TeamDetails';
 
 const Information = () => {
     return (
@@ -28,10 +29,11 @@ const Information = () => {
                     </ul>
                 </div>
                 <div className="Carousel"></div>
-                <div className='Name'></div>
-            
             </div>
             <div className='SlotBooking'>
+                <div className='TeamDetails'>
+                    <TeamDetails />
+                </div>
                 <SlotBooking />
             </div>
         </div>

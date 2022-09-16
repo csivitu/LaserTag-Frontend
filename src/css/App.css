@@ -71,7 +71,7 @@
 }
 .stuff {
     margin-left: 48px;
-    margin-top: 300px;
+    margin-top: 90px;
 }
 
 .day {
@@ -148,6 +148,67 @@
     background-color: #2a5388d1;
 }
 
+.TeamDetails{
+    display:flex;
+    margin-left: 23px;
+    margin-top: 55px;
+}
+
+.Size{
+    display: flex;
+    flex-direction: column;
+    width: 251px;
+    margin-right: 40px;
+    box-sizing: border-box;
+    border: none;
+}
+
+.Size label {
+    margin-bottom: 10px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.Size select {
+    background-color: #282828;
+    color: #515151;
+    border-radius: 6px;
+    height:48px;    
+    border: 0px solid;
+    font-size: 16px;
+    font-weight: 500;
+    padding-left: 15px;
+}
+
+.Size p{
+    margin-left: 10px;
+}
+
+.Name {
+    display:flex;
+    flex-direction: column;
+    width: 251px;
+    box-sizing: border-box;
+}
+
+.Name label {
+    margin-bottom: 10px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.Name input {
+    background-color: #282828;
+    color: #515151;
+    border-radius: 6px;
+    height:46px; 
+    border: 0px solid;
+    font-size: 16px;
+    font-weight: 500;
+    padding-left: 15px;
+}
 
 @media (max-width: 500px) {
     .content{
