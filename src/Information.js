@@ -1,6 +1,7 @@
 import './css/App.css';
 import SlotBooking from './SlotBooking';
 import TeamDetails from './TeamDetails';
+import Slideshow from './Slideshow';
 
 const Information = () => {
     return (
@@ -28,7 +29,12 @@ const Information = () => {
                         <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus.</li>
                     </ul>
                 </div>
-                <div className="Carousel"></div>
+                <div className="Carousel">
+                    <Slideshow />
+                </div>
+                <div className='randomText'>
+                    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam</p>
+                </div>
             </div>
             <div className='SlotBooking'>
                 <div className='TeamDetails'>

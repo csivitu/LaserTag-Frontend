@@ -31,6 +31,7 @@
     padding-left: 32px;
     padding-top: 5px;
     margin-top: 30px;
+    margin-bottom: 50px;
 }
 .Rules p{
     font-size: 24px;
@@ -66,6 +67,16 @@
     padding-top: 6px;
     padding-bottom: 6px;
 }
+
+.randomText{
+    margin-left: 250px;
+    margin-top: 50px;
+    font-weight: 300;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+
+}
+
 .SlotBooking{
     width: 50%;
 }
