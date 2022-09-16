@@ -120,7 +120,7 @@
 .Button:active{
     background-color: #65A7FFD1;
 }
-.Button:visited,.Button:focus{
+.Button:focus{
     background-color: #65A7FFD1;
 }
 
