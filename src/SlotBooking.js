@@ -19,7 +19,7 @@ const SlotBooking = () => {
                 ))}
             </div>
             {
-            (show !== -1) ? null : <button className='Book'><p>Confirm Booking</p><ArrowForwardIcon /></button >
+                (show !== -1) && <button className='Book'><p>Confirm Booking</p><ArrowForwardIcon /></button >
             }
         </div>     
     )
