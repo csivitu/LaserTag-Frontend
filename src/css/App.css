@@ -1,18 +1,28 @@
+.content {
+    display: flex;
+
+}
+
 .Information {
     width: 50%;
+    margin-right: 48px;
+    
 }
 
 .about {
     margin-top: 90px;
-    margin-left: 44px;
+    margin-left: 48px;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
 }
 
 .aboutInfo {
     margin-left: 48px;
-}
+} 
 
 .Rules{
-    margin-left: 48px;
+    margin-left: 48px; 
     background-color: #282828;
     background: #282828;
     box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.14);
@@ -56,3 +66,98 @@
     padding-top: 6px;
     padding-bottom: 6px;
 }
+.SlotBooking{
+    width: 50%;
+}
+.stuff {
+    margin-left: 48px;
+    margin-top: 300px;
+}
+
+.day {
+    margin-bottom: 30px;
+}
+
+.day p {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.slots {
+    max-width: 650px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    border-radius: 8px;
+    background-color: #282828;
+    align-items: center;
+    justify-content: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 30px;
+    padding-right: 10px;
+
+}
+
+.Button {
+    background-color: #171717;
+    box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.14);
+    width: 130px;
+    height: 50px;
+    color: #FFFFFF;
+    border-radius: 6px;
+    border-style: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 25px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.Button:hover{
+    background-color: rgb(67, 92, 116);
+}
+.Button:active{
+    background-color: #65A7FFD1;
+}
+.Button:visited,.Button:focus{
+    background-color: #65A7FFD1;
+}
+
+.Book{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    border-radius: 5px;
+    background-color: #2F80ED;
+    width: 200px;
+    height: 50px;
+    margin-top: 150px;
+    margin-left: 475px;
+    padding-left: 10px;
+    color: #FFFFFF;
+    border-style: none;
+}
+.Book p {
+    margin-right: 10px;
+}
+
+.Book:hover{
+    background-color: #2a5388d1;
+}
+
+
+@media (max-width: 500px) {
+    .content{
+        display: inline;
+    }
+    .Information{
+        width: 100%;
+    }
+    .SlotBooking{
+        width: 100%;
+    }
+}
+
