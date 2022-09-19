@@ -16,10 +16,14 @@ const Pagination = () => {
             </Button>
             <p>Day {date[dateId]}</p>
             <Button className="nextDay"
-                onClick = {() => {setDateId((dateId+1)%3)}}
+                onClick = {() => {setDateId((dateId+1)%3)
+                        console.log(dateId);
+                    }
+                }
             >
                 <KeyboardArrowRightTwoToneIcon />
             </Button> 
+            
         </div>
     )
 }
