@@ -13,9 +13,6 @@ const Information = () => {
                     porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel fringilla est
                 </p>
                 <div className='sortaButtons'>
-                    <div className='box'>
-
-                    </div>
                     <p>Team Game</p>
                     <p>15 mins</p>
                     <p>point 3</p>

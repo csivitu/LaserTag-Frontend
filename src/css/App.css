@@ -5,8 +5,11 @@
 
 .Information {
     width: 50%;
-    margin-right: 48px;
     
+}
+
+.SlotBooking {
+    width: 50%;
 }
 
 .about {
@@ -26,11 +29,11 @@
     background: #282828;
     box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.14);
     border-radius: 9.58678px;
-    height: 200px;
     padding-left: 32px;
     padding-top: 5px;
     margin-top: 30px;
     margin-bottom: 50px;
+    padding-bottom: 5px;
 }
 .Rules p{
     font-size: 24px;
@@ -61,6 +64,7 @@
     border-radius: 40px;
     width:150px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     padding-top: 6px;
@@ -75,7 +79,7 @@
     color: rgba(255, 255, 255, 0.75);
 
 }
-
+c
 .SlotBooking{
     width: 50%;
 }
@@ -141,7 +145,7 @@
     content: attr(label);
     margin-right:14px;
     margin-left: 14px;
-    padding-top: 10px; 
+    padding-top: 13px; 
     display: inline-block;
   }
 
@@ -157,7 +161,9 @@
 .Pagination p {
     margin-left: 10px;
     margin-right: 10px;
+    cursor: default;
 }
+
 
 
 .Book{
@@ -168,14 +174,14 @@
     font-size: 20px;
     border-radius: 5px;
     background-color: #2F80ED;
-    width: 200px;
-    margin-top: 150px;
-    margin-left: 475px;
+    width: 200px;    
     padding-left: 10px;
     color: #FFFFFF;
     border-style: none;
     height: 50px;
     cursor: pointer;
+    margin-top: 100px;
+    margin-left: 475px;
 }
 .Book p {
     margin-right: 10px;
@@ -247,15 +253,52 @@
     padding-left: 15px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 640px) {
     .content{
-        display: inline;
+        flex-direction: column;
+    }
+    .content .aboutInfo {
+        margin-right: 10px;
     }
     .Information{
         width: 100%;
     }
+    .Information .sortaButtons {
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+    .Information .Rules {
+        margin-right: 30px;
+    }
+
+    .Information .randomText {
+        margin-left: 85px;
+        margin-right: 60px;
+    }
+
+    .TeamDetails {
+        flex-direction: column;
+    }
+
+    .slots {
+        padding: 10px;
+    }
+    .slots input {
+        margin-left: 25px;
+    }
+
     .SlotBooking{
         width: 100%;
+    }
+    .SlotBooking .stuff {
+        margin-right: 32px;
+        margin-left: 20px;
+        padding-left: 10px;
+        margin-bottom: 100px;
+    }
+    .SlotBooking .stuff .Book {
+        margin-top: 30px;
+        margin-left: 160px;
     }
 }
 
