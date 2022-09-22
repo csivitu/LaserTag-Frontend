@@ -72,7 +72,9 @@
 }
 
 .randomText{
-    margin-left: 250px;
+    /* margin-left: 270px; */
+    padding-left: 28%;
+    padding-right: 10%;
     margin-top: 50px;
     font-weight: 300;
     font-size: 14px;
@@ -253,7 +255,7 @@ c
     padding-left: 15px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 750px) {
     .content{
         flex-direction: column;
     }
@@ -272,12 +274,15 @@ c
     }
 
     .Information .randomText {
-        margin-left: 85px;
-        margin-right: 60px;
+        margin-right: 0%;
+        margin-left: 0%;
+        padding-left: 17%;
+        padding-right: 10%;
     }
 
     .TeamDetails {
         flex-direction: column;
+        gap: 40px;
     }
 
     .slots {
@@ -296,9 +301,12 @@ c
         padding-left: 10px;
         margin-bottom: 100px;
     }
-    .SlotBooking .stuff .Book {
-        margin-top: 30px;
-        margin-left: 160px;
+    .SlotBooking .Book {
+        margin-left: 0px;
+        margin-right: 0px;
     }
+
+
+
 }
 

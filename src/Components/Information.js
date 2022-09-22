@@ -1,4 +1,4 @@
-import './css/App.css';
+import './../css/App.css';
 import SlotBooking from './SlotBooking';
 import TeamDetails from './TeamDetails';
 import Slideshow from './Slideshow';

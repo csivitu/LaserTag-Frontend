@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import KeyboardArrowRightTwoToneIcon from '@mui/icons-material/KeyboardArrowRightTwoTone';
 import KeyboardArrowLeftTwoToneIcon from '@mui/icons-material/KeyboardArrowLeftTwoTone';
-import './css/App.css';
-import { Button } from '@mui/material';
+import './../css/App.css';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 

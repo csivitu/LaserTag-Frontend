@@ -1,5 +1,5 @@
 import './css/App.css';
-import Information from './Information';
+import Information from './Components/Information';
 
 function App() {
   return (

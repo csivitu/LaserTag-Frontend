@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
-import "./css/App.css";
+import "./../css/App.css";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Radio } from "@mui/material";
 
 const SlotBooking = () => {
   const [show, setShow] = useState(-1);
@@ -60,8 +59,7 @@ const SlotBooking = () => {
           <ArrowForwardIcon />
         </button>
       )}
-
-    </div>
+      </div>
   );
 };
 
