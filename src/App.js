@@ -1,11 +1,37 @@
 import './css/App.css';
-import Information from './Components/Information';
+import Book from './Book';
+import Home from './Home';
+import Login from './Components/Login';
+import Items from './Components/oauth';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Information />
-    </div>
+    <Router>
+      <div className="App">
+        <Routes >
+         <Route exact path = "/" element={<Home />}/>
+         <Route exact path = "/book" element={<Book />}/>
+         <Route exact path = "/login" element={<Login />}/>
+         <Route path = "/oauth/token" element={<Items />}/>
+        </Routes>
+        {/* <Routes>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route exact path='/book'>
+            <Book />
+          </Route>
+          <Route exact path='/Login'>
+            <Login />
+          </Route>
+          <Route path = '/oauth'>
+            <Items />
+          </Route>
+        </Routes> */}
+      </div>
+    </Router>
+    
   );
 }
 
