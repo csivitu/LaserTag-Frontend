@@ -1,5 +1,5 @@
-import './../css/App.css';
-import SlotBooking from './SlotBooking';
+import './../../css/App.css';
+import SlotBooking from '../SlotBooking';
 import TeamDetails from './TeamDetails';
 import Slideshow from './Slideshow';
 
