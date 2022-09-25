@@ -1,7 +1,7 @@
 
 
 import ImageSlider from "./ImageSlider";
-import './../css/App.css';
+import './../../css/App.css';
 
 const Slideshow = () => {
   const slides = [

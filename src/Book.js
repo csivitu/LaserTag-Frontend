@@ -1,9 +1,8 @@
-import './css/App.css';
-import Information from './Components/Information';
+import Information from './Components/Wireframe/Information';
 import { useState,useEffect } from 'react';
 import {CircularProgress} from '@mui/material';
 import { UserInfo } from './Components/axios';
-import PageView from './PageView';
+import PageView from './Components/PageView';
 
 function App() {
   const [viewport,setViewPort] = useState(false);
@@ -19,7 +18,7 @@ function App() {
   // <>{viewport ? <Information /> : <div>
   //     <CircularProgress />
   //     </div>}</>
-  <>{viewport ? <Information /> : <div>
+  <>{viewport ? <PageView /> : <div>
       <CircularProgress />
       </div>}</>
   );
