@@ -73,10 +73,8 @@ const SlotBooking = (props) => {
         <button 
         className="Book"
         onClick={() => {
-          {
             setUserId(localStorage.getItem('token'))
             console.log({userId})
-          }
         }}
         >
           <p>Confirm Booking</p>

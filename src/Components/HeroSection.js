@@ -11,7 +11,7 @@ function Hero() {
             </div>
             <div className='flex flex-col sm:flex-row items-center justify-center gap-4'>
                 <button className='cursor-pointer py-3 px-5 text-xl bg-transparent border-2 border-gray-500 text-white outline-none border-solid rounded-lg w-48 hover:bg-laser-yellow hover:border-laser-yellow active:border-laser-yellow hover:text-black transition-all ease-linear' onClick={() => window.location.href = "https://events.vit.ac.in/events/gravitas2022/"}>Register Now</button>
-                <button className='cursor-pointer py-3 px-5 text-xl bg-transparent border-2 border-gray-500 text-white outline-none border-solid rounded-lg w-48 hover:bg-laser-yellow hover:border-laser-yellow active:border-laser-yellow hover:text-black transition-all ease-linear' onClick={() => window.location.href = "/book"}>Book Slot</button>
+                <button className='cursor-pointer py-3 px-5 text-xl bg-transparent border-2 border-gray-500 text-white outline-none border-solid rounded-lg w-48 hover:bg-laser-yellow hover:border-laser-yellow active:border-laser-yellow hover:text-black transition-all ease-linear' onClick={() => window.location.href = "/login"}>Book Slot</button>
             </div>
         </div>
     )
