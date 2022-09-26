@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const headers = {
-        Authorization: localStorage.getItem('token'),
+    Authorization: localStorage.getItem('token'),
 };
 
 export const axiosAuthInstance = axios.create({
@@ -20,7 +20,11 @@ export const axiosDataInstance = axios.create({
 export const UserInfo = async() => {
     try{
         console.log(headers)
-        const res = await axiosDataInstance.get('/v1/app/userInfo');
+        const res = await axiosDataInstance.get('/v1/app/userInfo',{
+            headers: {
+                Authorization: localStorage.getItem('token')
+            }
+        });
         console.log(res)
     }
     catch(e){

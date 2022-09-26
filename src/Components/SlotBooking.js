@@ -44,13 +44,13 @@ const SlotBooking = (props) => {
     "05:45 PM",
     "06:00 PM",
   ];
-  useEffect(() => {
-    setTimeout(() => {
-      fetch("http://localhost:8000").then((res) => {
-        setIsPending(false);
-      });
-    }, 1000);
-  });
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     fetch("http://localhost:8000").then((res) => {
+  //       setIsPending(false);
+  //     });
+  //   }, 1000);
+  // });
   return (
     <div className="stuff">
       {/* <Pagination /> */}
