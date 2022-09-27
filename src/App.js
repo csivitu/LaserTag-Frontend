@@ -1,9 +1,10 @@
 import './css/App.css';
-import Book from './Book';
-import Home from './Home';
+// import Book from './Book';
+import Book from './pages/book';
+// import Home from './Home';
 import Login from './Components/Login';
 import Items from './Components/oauth';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/landing';
 
 function App() {
@@ -11,10 +12,10 @@ function App() {
     <Router>
       <div className="App">
         <Routes >
-         <Route exact path = "/" element={<Landing />}/>
-         <Route exact path = "/book" element={<Book />}/>
-         <Route exact path = "/login" element={<Login />}/>
-         <Route path = "/oauth/token" element={<Items />}/>
+          <Route exact path="/" element={<Landing />} />
+          <Route exact path="/book" element={<Book />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route path="/oauth/token" element={<Items />} />
         </Routes>
         {/* <Routes>
           <Route exact path='/'>

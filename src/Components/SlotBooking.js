@@ -1,5 +1,7 @@
+import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import "./../css/App.css";
+import { getSlots } from "./axios";
 
 const SlotBooking = (props) => {
   const [show, setShow] = useState(-1);
@@ -27,10 +29,6 @@ const SlotBooking = (props) => {
     "12:15 PM",
     "12:30 PM",
     "12:45 PM",
-    "01:00 PM",
-    "01:15 PM",
-    "01:30 PM",
-    "01:45 PM",
     "02:00 PM",
     "02:15 PM",
     "02:30 PM",
@@ -38,49 +36,53 @@ const SlotBooking = (props) => {
     "03:00 PM",
     "03:15 PM",
     "03:30 PM",
+    "03:45 PM",
+    "04:00 PM",
+    "04:15 PM",
+    "04:30 PM",
+    "04:45 PM",
     "05:00 PM",
     "05:15 PM",
-    "05:30 PM",
-    "05:45 PM",
-    "06:00 PM",
   ];
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     fetch("http://localhost:8000").then((res) => {
-  //       setIsPending(false);
-  //     });
-  //   }, 1000);
-  // });
+
+  useEffect(() => {
+    getSlots();
+  });
+
   return (
     <div className="stuff">
       {/* <Pagination /> */}
-      <div className="slots">
-        {isPending ? (
-          <div className="Loading">Loading ....</div>
-        ) : (
-          timeList.map((time, index) => (
+      {isPending ? (
+        <div className='flex flex-col items-center justify-center h-full'>
+          <CircularProgress />
+          <p className='text-lg'>Loading...</p>
+        </div>
+      ) : (
+        <div className="slots">
+          {timeList.map((time, index) => (
             <input label={time}
-            type="radio" 
-            checked = {time === slot} 
-            onClick={() => 
-                {setShow(index);
-                setSlot(time);}} 
+              type="radio"
+              checked={time === slot}
+              onClick={() => {
+                setShow(index);
+                setSlot(time);
+              }}
             />
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
       {show !== -1 && (
-        <button 
-        className="Book"
-        onClick={() => {
+        <button
+          className="Book"
+          onClick={() => {
             setUserId(localStorage.getItem('token'))
-            console.log({userId})
-        }}
+            console.log({ userId })
+          }}
         >
           <p>Confirm Booking</p>
         </button>
       )}
-      </div>
+    </div>
   );
 };
 
