@@ -1,40 +1,58 @@
 import React, { useEffect, useState } from 'react';
 import './../css/App.css';
-import { getSlots } from './axios';
+import { chooseSlot, getSlots, getUserInfo } from './axios';
+import { BookingInfo } from './BookingInfo';
 import DatePicker from './Calender';
 import SlotBooking from './SlotBooking';
 import { allSlots } from './SlotData';
 
 const areDatesEqual = (d1, d2) => {
-	return (new Date(d1)).getTime() === (new Date(d2)).getTime();
+	return new Date(d1).getTime() === new Date(d2).getTime();
 };
 
 const PageView = () => {
 	const [day, setDay] = useState(0);
 	const [slot, setSlot] = useState(-1);
 	const [slotData, setSlotData] = useState([]);
+	const [userData, setUserData] = useState(undefined);
 
-	const handleSlotBooking = () => {
+	const handleSlotBooking = async () => {
 		console.log(day, slot);
 		console.log(allSlots[day][slot]);
 		const chosenSlotDetails = slotData.find(
 			(e) =>
 				areDatesEqual(e.startTime, allSlots[day][slot].startTime) &&
-				areDatesEqual(e.endTime, allSlots[day][slot].startTime)
+				areDatesEqual(e.endTime, allSlots[day][slot].endTime)
 		);
-		console.log(chosenSlotDetails);
+
+		console.log(chosenSlotDetails._id);
+
+		const response = chooseSlot(chosenSlotDetails._id);
+		console.log(response);
 	};
 
 	useEffect(() => {
 		const getSlotData = async () => {
-			const data = await getSlots();
-			setSlotData(data.data.slots);
+			const userRes = await getUserInfo();
+			if (userRes.success) {
+				console.log(userRes.userInfo);
+				setUserData(userRes.userInfo);
+			} else {
+				console.log(userRes);
+			}
+
+			const slotRes = await getSlots();
+			if (slotRes.success) {
+				setSlotData(slotRes.slots);
+			} else {
+				console.log(slotRes.message);
+			}
 		};
 		getSlotData();
 	}, []);
 
 	return (
-		<div className='bg-dark-black flex items-center justify-center h-screen w-screen'>
+		<div className='bg-dark-black flex flex-col items-center justify-center h-screen w-screen'>
 			<div className='w-11/12 sm:w-4/5 h-5/6 sm:h-4/5 flex flex-col md:flex-row bg-gray-modal rounded-3xl overflow-auto border-1 border-stone-700 border-solid px-4 lg:px-10'>
 				<div className='md:p-5 border-0 border-b-1 md:border-r-1 border-stone-700 border-solid w-full md:w-1/2 flex flex-col gap-2 pb-5 md:pb-0'>
 					<p className='text-white sm:whitespace-nowrap text-2xl sm:text-3xl md:text-2xl lg:text-3xl font-inter my-8 sm:my-4 font-semibold'>
@@ -77,6 +95,7 @@ const PageView = () => {
 					</div>
 				</div>
 			</div>
+			<BookingInfo userData={userData} />
 		</div>
 	);
 };
