@@ -26,7 +26,7 @@ export const BookingInfo = ({ userData }) => {
 
 	return (
 		<>
-			<div className='absolute top-5 right-5'>
+			<div className='absolute top-1 md:top-5 right-1 md:right-5'>
 				<Fab
 					color='primary'
 					aria-label='add'
@@ -57,20 +57,20 @@ export const BookingInfo = ({ userData }) => {
 				<DialogContent>
 					{userData && (
 						<DialogContentText id='alert-dialog-description'>
-							<div className='flex justify-center gap-2 items-center'>
+							<div className='flex flex-col md:flex-row justify-center gap-2 items-start md:items-center'>
 								<img
 									src={`https://avatars.dicebear.com/api/bottts/${userData.username}.svg`}
 									alt='Avatar'
 									className='w-28'
 								/>
-								<div>
+								<div className='w-full'>
 									<p className='m-0 text-lg font-bold text-white'>
 										{userData.name}
 									</p>
 									<p className='m-0 text-sm'>
 										{userData.username}
 									</p>
-									<p className='m-0 text-sm'>
+									<p className='mt-0 mb-1 text-sm'>
 										{userData.email}
 									</p>
 									<button
@@ -82,7 +82,7 @@ export const BookingInfo = ({ userData }) => {
 								</div>
 							</div>
 							<div>
-								<p className='text-lg font-bold m-0 text-white'>
+								<p className='text-lg font-bold mb-0 text-white'>
 									Slot Details:
 								</p>
 								{userData.slotBooked ? (
