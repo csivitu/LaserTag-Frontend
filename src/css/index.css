@@ -1,12 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
-body {
-  font-family: 'Inter',sans-serif;
-  background-color: #111111;
-  color:#FFFFFFBF;
-  display: flex;
-}
- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 /* @tailwind base; */
 @tailwind components;
@@ -29,6 +21,7 @@ a {
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sk-chase {
@@ -131,7 +124,7 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: 20px;
+  display: none;
 }
 
 ::-webkit-scrollbar-track {
@@ -140,8 +133,8 @@ a {
 
 ::-webkit-scrollbar-thumb {
   background-color: #FFFFFF;
-  border-radius: 20px;
-  border: 6px solid transparent;
+  border-radius: 10px;
+  border: 2px solid transparent;
   background-clip: content-box;
 }
 
