@@ -1,78 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { findSlot, processSlotData } from '../util/processSlotData';
 import './../css/App.css';
 import { chooseSlot, getSlots, getUserInfo } from './axios';
 import { BookingInfo } from './BookingInfo';
 import DatePicker from './Calender';
 import { ToastContext } from './GlobalAlert';
 import SlotBooking from './SlotBooking';
-import { allSlots } from './SlotData';
-
-const areDatesEqual = (d1, d2) => {
-	return new Date(d1).getTime() === new Date(d2).getTime();
-};
 
 const PageView = () => {
 	const { handleSnackOpen } = useContext(ToastContext);
 	const [day, setDay] = useState(0);
-	const [slot, setSlot] = useState(-1);
-	const [slotData, setSlotData] = useState([]);
+	const [slot, setSlot] = useState(null);
+	const [slotsDataPro, setSlotsDataPro] = useState({ 0: {}, 1: {}, 2: {} })
 	const [userData, setUserData] = useState(undefined);
-	const [selectedSlot, setSelectedSlot] = useState({
-		day: null,
-		time: null,
-	});
+	const [selectedSlot, setSelectedSlot] = useState(null);
 	const [disableButton, setDisableButton] = useState(false);
-
-	const getSelectedSlot = () => {
-		if (!userData || !userData.slotBooked)
-			return {
-				day: null,
-				time: null,
-			};
-
-		const days = {
-			30: 0,
-			1: 1,
-			2: 2,
-		};
-
-		const newDay = userData.slotBooked.startTime
-			? days[new Date(userData.slotBooked.startTime).getDate()]
-			: null;
-		const newTime = userData.slotBooked.startTime
-			? new Date(userData.slotBooked.startTime)
-					.toTimeString()
-					.substring(0, 5)
-			: null;
-
-		return {
-			day: newDay,
-			time: newTime,
-		};
-	};
-
-	const updateSelectedSlot = () => {
-		setSelectedSlot(getSelectedSlot());
-	};
-
-	useEffect(() => {
-		updateSelectedSlot();
-	}, [userData]);
-
-	const handleChangeUserData = (newData) => {
-		setUserData(newData);
-		updateSelectedSlot();
-	};
 
 	const handleSlotBooking = async () => {
 		setDisableButton(true);
-		const chosenSlotDetails = slotData.find(
-			(e) =>
-				areDatesEqual(e.startTime, allSlots[day][slot].startTime) &&
-				areDatesEqual(e.endTime, allSlots[day][slot].endTime)
-		);
 
-		const res = await chooseSlot(chosenSlotDetails._id);
+		const res = await chooseSlot(slot);
 		if (res.success) {
 			setUserData(res.data);
 			handleSnackOpen({
@@ -90,11 +37,13 @@ const PageView = () => {
 	};
 
 	const getAllData = async () => {
-        setSlotData([]);
+        setSlotsDataPro({ 0: {}, 1: {}, 2: {} });
         setUserData(undefined);
 		const userRes = await getUserInfo();
 		if (userRes.success) {
 			setUserData(userRes.userInfo);
+			const bookedSlotDetails = userRes.userInfo.slotBooked;
+			setSelectedSlot(bookedSlotDetails ? bookedSlotDetails._id : null);
 		} else {
 			handleSnackOpen({
 				message: `Error ${userRes.code}: ${userRes.message}`,
@@ -104,7 +53,7 @@ const PageView = () => {
 
 		const slotRes = await getSlots();
 		if (slotRes.success) {
-			setSlotData(slotRes.slots);
+			setSlotsDataPro(processSlotData(slotRes.slots))
 		} else {
 			handleSnackOpen({
 				message: `Error ${slotRes.code}: ${slotRes.message}`,
@@ -128,6 +77,7 @@ const PageView = () => {
 						day={day}
 						setDay={setDay}
 						selectedSlot={selectedSlot}
+						slotsDataPro={slotsDataPro}
 					/>
 				</div>
 				<div className='md:p-5 w-full md:w-1/2 flex flex-col gap-2'>
@@ -146,9 +96,8 @@ const PageView = () => {
 						slot={slot}
 						setSlot={setSlot}
 						day={day}
-						slotData={slotData}
+						slotsDataPro={slotsDataPro}
 						selectedSlot={selectedSlot}
-						getSelectedSlot={getSelectedSlot}
 					/>
 					<p className='hidden md:block text-xs text-center text-stone-600'>
 						Hover for the number of seats left.
@@ -158,8 +107,7 @@ const PageView = () => {
 							className='relative py-2.5 px-8 my-3 text-md rounded-lg font-inter border-none cursor-pointer'
 							disabled={
 								slot === -1 ||
-								selectedSlot.day ||
-								selectedSlot.time ||
+								selectedSlot||
 								disableButton
 							}
 							title={

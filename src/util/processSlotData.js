@@ -1,0 +1,51 @@
+export const processSlotData = (slots) => {
+	if (!slots || !slots.length) return { 0: {}, 1: {}, 2: {} };
+
+	let slotsData = { 0: {}, 1: {}, 2: {} };
+
+	slots.sort((a, b) => {
+		return new Date(a.startTime) - new Date(b.startTime);
+	});
+
+	slots = slots.map((slot) => {
+		return {
+			...slot,
+			startTimeStr: getTime(slot.startTime),
+			endTimeStr: getTime(slot.endTime),
+			day: getDay(slot.startTime),
+		};
+	});
+
+	slots.forEach((slot) => {
+		slotsData[slot.day][slot.startTimeStr] = slot;
+	});
+
+	console.log(slotsData);
+	return slotsData;
+};
+
+export const findSlot = (slotsData, id) => {
+	if (!id) return false;
+	
+	const allSlots = [
+		...Object.values(slotsData[0]),
+		...Object.values(slotsData[1]),
+		...Object.values(slotsData[2]),
+	];
+
+	return allSlots.find((e) => e._id === id);
+};
+
+export const getTime = (date) => {
+	const options = {
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: true,
+		timeZone: 'IST',
+	};
+	return new Date(date).toLocaleString('en-US', options);
+};
+
+export const getDay = (date) => {
+	return new Date(date).getDate() === 30 ? 0 : new Date(date).getDate();
+};

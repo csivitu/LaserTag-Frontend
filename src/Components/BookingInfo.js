@@ -16,6 +16,8 @@ import { ToastContext } from './GlobalAlert';
 import Lottie from 'lottie-react';
 import lasertagLogo from '../lottie/loading.json';
 import { FaChevronDown, FaUserAlt } from 'react-icons/fa';
+import { StormTrooperIcon } from './Icons';
+import { getTime } from '../util/processSlotData';
 
 export const BookingInfo = ({ userData, getAllData }) => {
 	const [open, setOpen] = useState(true);
@@ -59,11 +61,22 @@ export const BookingInfo = ({ userData, getAllData }) => {
 		<>
 			<div className='fixed top-1 md:top-5 right-1 md:right-5'>
 				<Fab
-					color='primary'
+					color="primary"
 					aria-label='add'
 					onClick={() => setOpen(true)}
+					sx={{
+						backgroundColor: "#1C1C1C",
+						border: "1.5px solid rgb(68 64 60)",
+						color: "white",
+						":hover": {
+							backgroundColor: "#FFE81F",
+							color: "black",
+							transition: "all 0.3s ease-in-out",
+							borderColor: "black"
+						}
+					}}
 				>
-					<FaUserAlt className='h-5 w-5' />
+					<StormTrooperIcon className='h-8 w-8' />
 				</Fab>
 			</div>
 			<Dialog
@@ -76,10 +89,10 @@ export const BookingInfo = ({ userData, getAllData }) => {
 					<h2 className='m-0'>
 						<img
 							src='/images/hello-there.svg'
-							alt=''
-							className='h-10 mr-2'
+							alt='Hello There'
+							className='h-6 mr-2'
 						/>
-						Hello there,
+						Hello there.
 					</h2>
 				</DialogTitle>
 				<DialogContent>
@@ -128,9 +141,9 @@ export const BookingInfo = ({ userData, getAllData }) => {
 											)}
 										</p>
 										<p className='text-sm m-0'>
-											{getDate(
+											{new Date(
 												userData.slotBooked.startTime
-											)}
+											).toDateString()}
 										</p>
 										<div>
 											{!cancel ? (
@@ -226,7 +239,8 @@ export const BookingInfo = ({ userData, getAllData }) => {
 									)}
 								</p>
 								<p className='text-xs m-0 text-stone-500'>
-									Note: Just before you play LaserTag, your QR Code will be scanned.
+									Note: Just before you play LaserTag, your QR
+									Code will be scanned.
 								</p>
 							</div>
 						</div>
@@ -306,8 +320,9 @@ export const BookingInfo = ({ userData, getAllData }) => {
 						<AccordionDetails>
 							<ol className='m-0'>
 								<li>
-									Once your slot has been confirmed no changes
-									will be allowed.
+									A maximum of one slot cancellation is
+									allowed up to 12 hours before the start of
+									the slot.
 								</li>
 								<li>
 									You won’t be allowed to play if your slot
@@ -328,12 +343,4 @@ export const BookingInfo = ({ userData, getAllData }) => {
 			</Dialog>
 		</>
 	);
-};
-
-const getTime = (date) => {
-	return new Date(date).toTimeString().substring(0, 5);
-};
-
-const getDate = (date) => {
-	return new Date(date).toDateString();
 };

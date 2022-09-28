@@ -1,4 +1,13 @@
-export default function DatePicker({ day, setDay, selectedSlot }) {
+import { findSlot } from '../util/processSlotData';
+
+export default function DatePicker({
+	day,
+	setDay,
+	slotsDataPro,
+	selectedSlot,
+}) {
+	const selectedSlotDetails = findSlot(slotsDataPro, selectedSlot);
+	
 	return (
 		<>
 			<h3 className='font-bold text-xl mb-4'>September 2022</h3>
@@ -57,9 +66,11 @@ export default function DatePicker({ day, setDay, selectedSlot }) {
 					<div
 						className='py-3 cursor-pointer w-5/6 align-middle text-center rounded-lg box-border'
 						onClick={() => setDay(e)}
+						key={index}
 						style={{
 							backgroundColor:
-								e === selectedSlot.day
+								selectedSlotDetails &&
+								selectedSlotDetails.day === e
 									? '#1b5e20'
 									: day === e
 									? '#4F4F4F'

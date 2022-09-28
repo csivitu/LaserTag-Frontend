@@ -74,7 +74,10 @@
 }
 
 .slots input:hover {
-    background: rgb(67, 92, 116);
+    /* background: rgb(67, 92, 116); */
+    background: #444444;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 0px #808080;
 }
 
 .slots input:checked {

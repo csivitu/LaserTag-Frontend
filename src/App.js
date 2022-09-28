@@ -5,6 +5,7 @@ import Items from './Components/oauth';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/landing';
 import Scan from './pages/Scan';
+import Admin from './pages/admin';
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 					<Route exact path='/login' element={<Login />} />
 					<Route exact path='/oauth/token' element={<Items />} />
 					<Route exact path='/scan/:username' element={<Scan />} />
+					<Route exact path='/admin' element={<Admin />} />
 				</Routes>
 			</Router>
 		</div>
