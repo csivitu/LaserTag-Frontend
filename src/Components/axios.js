@@ -59,7 +59,7 @@ export const chooseSlot = async (slotId) => {
             data: data.data.user,
         };
 	} catch (e) {
-		console.log(e.response);
+		console.log(e);
         return {
             success: false,
             error: e,
@@ -77,7 +77,7 @@ export const cancelSlot = async () => {
             data: data.data.user,
         };
 	} catch (e) {
-		console.log(e.response);
+		console.log(e);
         return {
             success: false,
             error: e,
@@ -96,7 +96,7 @@ export const scanQRCode = async (username) => {
             data: data.data.user,
         };
 	} catch (e) {
-		console.log(e.response);
+		console.log(e);
         return {
             success: false,
             error: e,

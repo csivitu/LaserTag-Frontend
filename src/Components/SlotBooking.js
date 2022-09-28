@@ -1,4 +1,4 @@
-import { timeList } from './SlotData';
+import { timeHourList, timeList } from './SlotData';
 import Lottie from 'lottie-react';
 import lasertagLogo from '../lottie/loading.json';
 import { SlotTooltip } from './SlotTooltip';
@@ -30,10 +30,11 @@ const SlotBooking = ({ slot, setSlot, day, slotData, getSelectedSlot }) => {
 								className='text-center'
 								style={
 									selectedSlot.day === day &&
-									selectedSlot.time ===
-										time.substring(0, 5) ? {
-										backgroundColor: '#1b5e20',
-									} : {}
+									selectedSlot.time === timeHourList[time]
+										? {
+												backgroundColor: '#1b5e20',
+										  }
+										: {}
 								}
 								label={time}
 								type='radio'

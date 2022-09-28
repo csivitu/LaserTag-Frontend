@@ -5,7 +5,6 @@ import { useSearchParams } from 'react-router-dom';
 export default function Items() {
     const [searchParams,setSearchParams] = useSearchParams();
     const token = searchParams.get('token');
-    console.log({token});
     window.location.href = '/book';
     localStorage.setItem('token',token);
     return <></>;

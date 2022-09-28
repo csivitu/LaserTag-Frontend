@@ -17,7 +17,7 @@ import Lottie from 'lottie-react';
 import lasertagLogo from '../lottie/loading.json';
 import { FaChevronDown, FaUserAlt } from 'react-icons/fa';
 
-export const BookingInfo = ({ userData, setUserData }) => {
+export const BookingInfo = ({ userData, getAllData }) => {
 	const [open, setOpen] = useState(true);
 	const [cancel, setCancel] = useState(false);
 	const { handleSnackOpen } = useContext(ToastContext);
@@ -41,7 +41,7 @@ export const BookingInfo = ({ userData, setUserData }) => {
 	const handleSlotCancel = async () => {
 		const res = await cancelSlot();
 		if (res.success) {
-			setUserData(res.data);
+			getAllData();
 			handleSnackOpen({
 				message: 'Slot cancelled successfully',
 				variant: 'success',

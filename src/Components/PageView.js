@@ -21,7 +21,7 @@ const PageView = () => {
 		day: null,
 		time: null,
 	});
-    const [disableButton, setDisableButton] = useState(false);
+	const [disableButton, setDisableButton] = useState(false);
 
 	const getSelectedSlot = () => {
 		if (!userData || !userData.slotBooked)
@@ -35,8 +35,6 @@ const PageView = () => {
 			1: 1,
 			2: 2,
 		};
-
-		console.log(userData);
 
 		const newDay = userData.slotBooked.startTime
 			? days[new Date(userData.slotBooked.startTime).getDate()]
@@ -67,7 +65,7 @@ const PageView = () => {
 	};
 
 	const handleSlotBooking = async () => {
-        setDisableButton(true);
+		setDisableButton(true);
 		const chosenSlotDetails = slotData.find(
 			(e) =>
 				areDatesEqual(e.startTime, allSlots[day][slot].startTime) &&
@@ -87,32 +85,36 @@ const PageView = () => {
 				variant: 'error',
 			});
 		}
-        setDisableButton(false);
+        await getAllData();
+		setDisableButton(false);
+	};
+
+	const getAllData = async () => {
+        setSlotData([]);
+        setUserData(undefined);
+		const userRes = await getUserInfo();
+		if (userRes.success) {
+			setUserData(userRes.userInfo);
+		} else {
+			handleSnackOpen({
+				message: `Error ${userRes.code}: ${userRes.message}`,
+				variant: 'error',
+			});
+		}
+
+		const slotRes = await getSlots();
+		if (slotRes.success) {
+			setSlotData(slotRes.slots);
+		} else {
+			handleSnackOpen({
+				message: `Error ${slotRes.code}: ${slotRes.message}`,
+				variant: 'error',
+			});
+		}
 	};
 
 	useEffect(() => {
-		const getSlotData = async () => {
-			const userRes = await getUserInfo();
-			if (userRes.success) {
-				setUserData(userRes.userInfo);
-			} else {
-				handleSnackOpen({
-					message: `Error ${userRes.code}: ${userRes.message}`,
-					variant: 'error',
-				});
-			}
-
-			const slotRes = await getSlots();
-			if (slotRes.success) {
-				setSlotData(slotRes.slots);
-			} else {
-				handleSnackOpen({
-					message: `Error ${slotRes.code}: ${slotRes.message}`,
-					variant: 'error',
-				});
-			}
-		};
-		getSlotData();
+		getAllData();
 	}, []);
 
 	return (
@@ -158,7 +160,7 @@ const PageView = () => {
 								slot === -1 ||
 								selectedSlot.day ||
 								selectedSlot.time ||
-                                disableButton
+								disableButton
 							}
 							title={
 								slot === -1 ? 'Select a Slot to enable' : null
@@ -172,7 +174,7 @@ const PageView = () => {
 			</div>
 			<BookingInfo
 				userData={userData}
-				setUserData={handleChangeUserData}
+                getAllData={getAllData}
 			/>
 		</div>
 	);
