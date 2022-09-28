@@ -86,14 +86,14 @@ export const BookingInfo = ({ userData, getAllData }) => {
 				aria-describedby='alert-dialog-description'
 			>
 				<DialogTitle id='alert-dialog-title'>
-					<h2 className='m-0'>
-						<img
-							src='/images/hello-there.svg'
-							alt='Hello There'
-							className='h-6 mr-2'
-						/>
-						Hello there.
-					</h2>
+					<div className='flex items-end'>
+					<img
+						src='/images/hello-there.svg'
+						alt='Hello There'
+						className='h-6 mr-2 mb-3'
+					/>
+					<h2 className='m-0'>Hello there.</h2>
+					</div>
 				</DialogTitle>
 				<DialogContent>
 					{userData ? (

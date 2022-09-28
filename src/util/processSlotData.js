@@ -20,7 +20,6 @@ export const processSlotData = (slots) => {
 		slotsData[slot.day][slot.startTimeStr] = slot;
 	});
 
-	console.log(slotsData);
 	return slotsData;
 };
 
