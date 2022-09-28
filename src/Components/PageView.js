@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { findSlot, processSlotData } from '../util/processSlotData';
+import { processSlotData } from '../util/processSlotData';
 import './../css/App.css';
 import { chooseSlot, getSlots, getUserInfo } from './axios';
 import { BookingInfo } from './BookingInfo';

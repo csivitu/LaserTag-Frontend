@@ -1,14 +1,15 @@
 import Lottie from 'lottie-react';
 import lasertagLogo from '../lottie/loading.json';
-import { findSlot } from '../util/processSlotData';
+import { findSlot, getTimeSlots } from '../util/processSlotData';
 import { SlotTooltip } from './SlotTooltip';
 
 const SlotBooking = ({ slot, setSlot, day, slotsDataPro, selectedSlot }) => {
 	const selectedSlotDetails = findSlot(slotsDataPro, selectedSlot);
+	const slotsForTheDay = getTimeSlots(slotsDataPro[day]);
 
 	return (
 		<div className='overflow-y-auto grow'>
-			{Object.keys(slotsDataPro[day]).length === 0 ? (
+			{slotsForTheDay.length === 0 ? (
 				<div className='flex flex-col items-center justify-center h-full'>
 					<Lottie animationData={lasertagLogo} className='w-1/2' />
 					<p className='text-base md:text-lg -mt-3 md:-mt-5'>
@@ -17,7 +18,7 @@ const SlotBooking = ({ slot, setSlot, day, slotsDataPro, selectedSlot }) => {
 				</div>
 			) : (
 				<div className='slots grid grid-cols-4 align-middle justify-items-center'>
-					{Object.keys(slotsDataPro[day]).map((time, index) => (
+					{slotsForTheDay.map((time, index) => (
 						<SlotTooltip
 							day={day}
 							slotDetails={slotsDataPro[day][time]}

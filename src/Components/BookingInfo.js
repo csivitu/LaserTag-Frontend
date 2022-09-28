@@ -15,7 +15,7 @@ import { cancelSlot } from './axios';
 import { ToastContext } from './GlobalAlert';
 import Lottie from 'lottie-react';
 import lasertagLogo from '../lottie/loading.json';
-import { FaChevronDown, FaUserAlt } from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
 import { StormTrooperIcon } from './Icons';
 import { getTime } from '../util/processSlotData';
 
@@ -61,19 +61,19 @@ export const BookingInfo = ({ userData, getAllData }) => {
 		<>
 			<div className='fixed top-1 md:top-5 right-1 md:right-5'>
 				<Fab
-					color="primary"
+					color='primary'
 					aria-label='add'
 					onClick={() => setOpen(true)}
 					sx={{
-						backgroundColor: "#1C1C1C",
-						border: "1.5px solid rgb(68 64 60)",
-						color: "white",
-						":hover": {
-							backgroundColor: "#FFE81F",
-							color: "black",
-							transition: "all 0.3s ease-in-out",
-							borderColor: "black"
-						}
+						backgroundColor: '#1C1C1C',
+						border: '1.5px solid rgb(68 64 60)',
+						color: 'white',
+						':hover': {
+							backgroundColor: '#FFE81F',
+							color: 'black',
+							transition: 'all 0.3s ease-in-out',
+							borderColor: 'black',
+						},
 					}}
 				>
 					<StormTrooperIcon className='h-8 w-8' />

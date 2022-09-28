@@ -26,7 +26,7 @@ export const processSlotData = (slots) => {
 
 export const findSlot = (slotsData, id) => {
 	if (!id) return false;
-	
+
 	const allSlots = [
 		...Object.values(slotsData[0]),
 		...Object.values(slotsData[1]),
@@ -34,6 +34,12 @@ export const findSlot = (slotsData, id) => {
 	];
 
 	return allSlots.find((e) => e._id === id);
+};
+
+export const getTimeSlots = (slots) => {
+	const keys = Object.keys(slots);
+	keys.sort((a, b) => new Date(a + ' 12/12/12') - new Date(b + ' 12/12/12'));
+	return keys;
 };
 
 export const getTime = (date) => {
