@@ -15,7 +15,7 @@ const findSlotDetails = (day, slot, allSlots, slotData) => {
 	return chosenSlotDetails;
 };
 
-export const SlotTooltip = ({ day, index, slotData, children }) => {
+export const SlotTooltip = ({ day, index, slotData, children, ...props }) => {
 	const slotDetails = findSlotDetails(day, index, allSlots, slotData);
 
 	return (
@@ -29,9 +29,9 @@ export const SlotTooltip = ({ day, index, slotData, children }) => {
 					<p className='font-bold mb-1'>Slot booked by:</p>
 					{slotDetails.slotBookedBy.length > 0 ? (
 						<ol className='pl-3 m-0 mb-3'>
-							{slotDetails.slotBookedBy.map((e) => {
+							{slotDetails.slotBookedBy.map((e,index) => {
 								return (
-									<li>
+									<li key={index}>
 										{e.name} ({e.username})
 									</li>
 								);
@@ -60,6 +60,7 @@ export const SlotTooltip = ({ day, index, slotData, children }) => {
 			disableInteractive
 			TransitionComponent={Zoom}
 			enterTouchDelay={0}
+			{...props}
 		>
 			{children}
 		</Tooltip>

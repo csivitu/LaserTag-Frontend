@@ -15,6 +15,7 @@ import { cancelSlot } from './axios';
 import { ToastContext } from './GlobalAlert';
 import Lottie from 'lottie-react';
 import lasertagLogo from '../lottie/loading.json';
+import { FaChevronDown, FaUserAlt } from 'react-icons/fa';
 
 export const BookingInfo = ({ userData, setUserData }) => {
 	const [open, setOpen] = useState(true);
@@ -51,6 +52,7 @@ export const BookingInfo = ({ userData, setUserData }) => {
 				variant: 'error',
 			});
 		}
+		setCancel(false);
 	};
 
 	return (
@@ -61,17 +63,7 @@ export const BookingInfo = ({ userData, setUserData }) => {
 					aria-label='add'
 					onClick={() => setOpen(true)}
 				>
-					<svg
-						stroke='currentColor'
-						fill='currentColor'
-						stroke-width='0'
-						viewBox='0 0 16 16'
-						height='1em'
-						width='1em'
-						xmlns='http://www.w3.org/2000/svg'
-					>
-						<path d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z'></path>
-					</svg>
+					<FaUserAlt className='h-5 w-5' />
 				</Fab>
 			</div>
 			<Dialog
@@ -81,7 +73,14 @@ export const BookingInfo = ({ userData, setUserData }) => {
 				aria-describedby='alert-dialog-description'
 			>
 				<DialogTitle id='alert-dialog-title'>
-					<h2 className='m-0'>Hello there,</h2>
+					<h2 className='m-0'>
+						<img
+							src='/images/hello-there.svg'
+							alt=''
+							className='h-10 mr-2'
+						/>
+						Hello there,
+					</h2>
 				</DialogTitle>
 				<DialogContent>
 					{userData ? (
@@ -139,7 +138,10 @@ export const BookingInfo = ({ userData, setUserData }) => {
 													onClick={() =>
 														setCancel(true)
 													}
-													className='py-1 px-2 cursor-pointer rounded-md mt-2 mb-1 border-2 border-solid border-red-500 bg-red-50'
+													className='py-1 px-2 cursor-pointer rounded-md mt-2 mb-1 border-1 border-solid border-red-500 bg-red-50'
+													disabled={
+														userData.isChangedSlot
+													}
 												>
 													Cancel Slot
 												</button>
@@ -169,12 +171,12 @@ export const BookingInfo = ({ userData, setUserData }) => {
 											)}
 										</div>
 										<p className='text-xs m-0 text-stone-500'>
-											Note: You can only cancel a slot
+											Note: You can cancel a slot only
 											once.
 										</p>
 									</>
 								) : (
-									<p className='text-sm m-0'>
+									<p className='text-sm m-0 text-stone-500'>
 										<i>Not booked yet!</i>
 									</p>
 								)}
@@ -208,9 +210,23 @@ export const BookingInfo = ({ userData, setUserData }) => {
 									)}
 								</p>
 								<p className='text-xs m-0 text-stone-500'>
-									Note: You can book a slot only when your
-									payment is verified. The payment
-									verification is done manually from our end.
+									Note: The payment verification is done
+									manually from our end.
+								</p>
+							</div>
+							<div>
+								<p className='m-0 align-middle'>
+									<b className='text-white'>
+										QR Code Scanned:
+									</b>{' '}
+									{userData.isScanned ? (
+										<BsFillCheckCircleFill className='text-green-600 -mb-0.5' />
+									) : (
+										<BsFillXCircleFill className='text-red-500 -mb-0.5' />
+									)}
+								</p>
+								<p className='text-xs m-0 text-stone-500'>
+									Note: Just before you play LaserTag, your QR Code will be scanned.
 								</p>
 							</div>
 						</div>
@@ -225,24 +241,30 @@ export const BookingInfo = ({ userData, setUserData }) => {
 							</p>
 						</div>
 					)}
-					{userData && userData.qrCode && <Accordion>
-						<AccordionSummary
-							aria-controls='panel1a-content'
-							id='panel1a-header'
-							expandIcon={<ExpandMoreIcon />}
-						>
-							QR Code
-						</AccordionSummary>
+					{userData && userData.qrCode && (
+						<Accordion>
+							<AccordionSummary
+								aria-controls='panel1a-content'
+								id='panel1a-header'
+								expandIcon={<FaChevronDown />}
+							>
+								QR Code
+							</AccordionSummary>
 
-						<AccordionDetails>
-							<div dangerouslySetInnerHTML={{ __html: userData.qrCode }} />
-						</AccordionDetails>
-					</Accordion>}
+							<AccordionDetails>
+								<div
+									dangerouslySetInnerHTML={{
+										__html: userData.qrCode,
+									}}
+								/>
+							</AccordionDetails>
+						</Accordion>
+					)}
 					<Accordion>
 						<AccordionSummary
 							aria-controls='panel1a-content'
 							id='panel1a-header'
-							expandIcon={<ExpandMoreIcon />}
+							expandIcon={<FaChevronDown />}
 						>
 							Instructions for slot booking
 						</AccordionSummary>
@@ -277,7 +299,7 @@ export const BookingInfo = ({ userData, setUserData }) => {
 						<AccordionSummary
 							aria-controls='panel1a-content'
 							id='panel1a-header'
-							expandIcon={<ExpandMoreIcon />}
+							expandIcon={<FaChevronDown />}
 						>
 							Disclaimer
 						</AccordionSummary>
@@ -301,29 +323,10 @@ export const BookingInfo = ({ userData, setUserData }) => {
 					</Accordion>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose} autoFocus>
-						DONE
-					</Button>
+					<Button onClick={handleClose}>DONE</Button>
 				</DialogActions>
 			</Dialog>
 		</>
-	);
-};
-
-const ExpandMoreIcon = () => {
-	return (
-		<svg
-			stroke='currentColor'
-			fill='currentColor'
-			stroke-width='0'
-			viewBox='0 0 24 24'
-			height='1em'
-			width='1em'
-			xmlns='http://www.w3.org/2000/svg'
-		>
-			<path d='M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z'></path>
-			<path d='M12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707-1.414-1.414z'></path>
-		</svg>
 	);
 };
 

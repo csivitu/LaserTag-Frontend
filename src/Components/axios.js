@@ -14,10 +14,12 @@ export const axiosInstance = axios.create({
 export const getUserInfo = async () => {
 	try {
 		const { data } = await axiosInstance.get('/v1/app/userInfo');
+
 		return {
             success: true,
             userInfo: data.data.user,
         };
+        
 	} catch (e) {
         console.log(e)
         return {
@@ -51,6 +53,7 @@ export const chooseSlot = async (slotId) => {
 		const { data } = await axiosInstance.post('/v1/app/slots', {
 			slotId: slotId,
 		});
+
 		return {
             success: true,
             data: data.data.user,
@@ -87,6 +90,7 @@ export const cancelSlot = async () => {
 export const scanQRCode = async (username) => {
     try {
 		const { data } = await axiosInstance.post('/v1/admin/scan/' + username);
+
 		return {
             success: true,
             data: data.data.user,

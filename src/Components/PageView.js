@@ -12,7 +12,7 @@ const areDatesEqual = (d1, d2) => {
 };
 
 const PageView = () => {
-    const { handleSnackOpen } = useContext(ToastContext);
+	const { handleSnackOpen } = useContext(ToastContext);
 	const [day, setDay] = useState(0);
 	const [slot, setSlot] = useState(-1);
 	const [slotData, setSlotData] = useState([]);
@@ -21,9 +21,14 @@ const PageView = () => {
 		day: null,
 		time: null,
 	});
+    const [disableButton, setDisableButton] = useState(false);
 
-	const updateSelectedSlot = () => {
-        if(!userData) return;
+	const getSelectedSlot = () => {
+		if (!userData || !userData.slotBooked)
+			return {
+				day: null,
+				time: null,
+			};
 
 		const days = {
 			30: 0,
@@ -31,22 +36,43 @@ const PageView = () => {
 			2: 2,
 		};
 
-        setSelectedSlot({
-            day: days[(new Date(userData.slotBooked.startTime)).getDate()],
-            time: (new Date(userData.slotBooked.startTime)).toTimeString().substring(0, 5),
-        })
+		console.log(userData);
+
+		const newDay = userData.slotBooked.startTime
+			? days[new Date(userData.slotBooked.startTime).getDate()]
+			: null;
+		const newTime = userData.slotBooked.startTime
+			? new Date(userData.slotBooked.startTime)
+					.toTimeString()
+					.substring(0, 5)
+			: null;
+
+		return {
+			day: newDay,
+			time: newTime,
+		};
+	};
+
+	const updateSelectedSlot = () => {
+		setSelectedSlot(getSelectedSlot());
+	};
+
+	useEffect(() => {
+		updateSelectedSlot();
+	}, [userData]);
+
+	const handleChangeUserData = (newData) => {
+		setUserData(newData);
+		updateSelectedSlot();
 	};
 
 	const handleSlotBooking = async () => {
-		console.log(day, slot);
-		console.log(allSlots[day][slot]);
+        setDisableButton(true);
 		const chosenSlotDetails = slotData.find(
 			(e) =>
 				areDatesEqual(e.startTime, allSlots[day][slot].startTime) &&
 				areDatesEqual(e.endTime, allSlots[day][slot].endTime)
 		);
-
-		console.log(chosenSlotDetails._id);
 
 		const res = await chooseSlot(chosenSlotDetails._id);
 		if (res.success) {
@@ -61,6 +87,7 @@ const PageView = () => {
 				variant: 'error',
 			});
 		}
+        setDisableButton(false);
 	};
 
 	useEffect(() => {
@@ -70,9 +97,9 @@ const PageView = () => {
 				setUserData(userRes.userInfo);
 			} else {
 				handleSnackOpen({
-                    message: `Error ${userRes.code}: ${userRes.message}`,
-                    variant: 'error',
-                });
+					message: `Error ${userRes.code}: ${userRes.message}`,
+					variant: 'error',
+				});
 			}
 
 			const slotRes = await getSlots();
@@ -80,15 +107,13 @@ const PageView = () => {
 				setSlotData(slotRes.slots);
 			} else {
 				handleSnackOpen({
-                    message: `Error ${slotRes.code}: ${slotRes.message}`,
-                    variant: 'error',
-                });
+					message: `Error ${slotRes.code}: ${slotRes.message}`,
+					variant: 'error',
+				});
 			}
 		};
 		getSlotData();
-	},[]);
-
-    useEffect(updateSelectedSlot, [userData]);
+	}, []);
 
 	return (
 		<div className='bg-dark-black flex flex-col items-center justify-center h-screen w-screen'>
@@ -97,7 +122,11 @@ const PageView = () => {
 					<p className='text-white sm:whitespace-nowrap text-2xl sm:text-3xl md:text-2xl lg:text-3xl font-inter my-8 sm:my-4 font-semibold'>
 						Laser Tag Slot Booking
 					</p>
-					<DatePicker day={day} setDay={setDay} selectedSlot={selectedSlot} />
+					<DatePicker
+						day={day}
+						setDay={setDay}
+						selectedSlot={selectedSlot}
+					/>
 				</div>
 				<div className='md:p-5 w-full md:w-1/2 flex flex-col gap-2'>
 					<p className='text-white sm:whitespace-nowrap text-2xl sm:text-3xl md:text-2xl lg:text-3xl font-inter my-8 sm:my-4 font-semibold'>
@@ -116,15 +145,21 @@ const PageView = () => {
 						setSlot={setSlot}
 						day={day}
 						slotData={slotData}
-                        selectedSlot={selectedSlot}
+						selectedSlot={selectedSlot}
+						getSelectedSlot={getSelectedSlot}
 					/>
 					<p className='hidden md:block text-xs text-center text-stone-600'>
-						Scroll for more slots.
+						Hover for the number of seats left.
 					</p>
 					<div className='text-right'>
 						<button
 							className='relative py-2.5 px-8 my-3 text-md rounded-lg font-inter border-none cursor-pointer'
-							disabled={slot === -1 || selectedSlot.day || selectedSlot.time}
+							disabled={
+								slot === -1 ||
+								selectedSlot.day ||
+								selectedSlot.time ||
+                                disableButton
+							}
 							title={
 								slot === -1 ? 'Select a Slot to enable' : null
 							}
@@ -135,7 +170,10 @@ const PageView = () => {
 					</div>
 				</div>
 			</div>
-			<BookingInfo userData={userData} setUserData={setUserData} />
+			<BookingInfo
+				userData={userData}
+				setUserData={handleChangeUserData}
+			/>
 		</div>
 	);
 };

@@ -2,8 +2,11 @@ import { timeList } from './SlotData';
 import Lottie from 'lottie-react';
 import lasertagLogo from '../lottie/loading.json';
 import { SlotTooltip } from './SlotTooltip';
+import { useState } from 'react';
 
-const SlotBooking = ({ slot, setSlot, day, slotData, selectedSlot }) => {
+const SlotBooking = ({ slot, setSlot, day, slotData, getSelectedSlot }) => {
+	const selectedSlot = getSelectedSlot();
+
 	return (
 		<div className='overflow-y-auto grow'>
 			{/* <Pagination /> */}
@@ -21,6 +24,7 @@ const SlotBooking = ({ slot, setSlot, day, slotData, selectedSlot }) => {
 							day={day}
 							index={index}
 							slotData={slotData}
+							key={index}
 						>
 							<input
 								className='text-center'
@@ -31,7 +35,6 @@ const SlotBooking = ({ slot, setSlot, day, slotData, selectedSlot }) => {
 										backgroundColor: '#1b5e20',
 									} : {}
 								}
-								key={index}
 								label={time}
 								type='radio'
 								checked={index === slot}
