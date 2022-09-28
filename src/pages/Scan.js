@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 import { scanQRCode } from '../Components/axios';
 import Lottie from 'lottie-react';

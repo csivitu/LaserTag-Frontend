@@ -7,33 +7,19 @@ import Landing from './pages/landing';
 import Scan from './pages/Scan';
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Routes >
-          <Route exact path="/" element={<Landing />} />
-          <Route exact path="/book" element={<Book />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route path="/oauth/token" element={<Items />} />
-          <Route path="/scan/:username" element={<Scan />} />
-        </Routes>
-        {/* <Routes>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route exact path='/book'>
-            <Book />
-          </Route>
-          <Route exact path='/Login'>
-            <Login />
-          </Route>
-          <Route path = '/oauth'>
-            <Items />
-          </Route>
-        </Routes> */}
-      </div>
-    </Router>
-  );
+	return (
+		<div className='App'>
+			<Router>
+				<Routes>
+					<Route exact path='/' element={<Landing />} />
+					<Route exact path='/book' element={<Book />} />
+					<Route exact path='/login' element={<Login />} />
+					<Route exact path='/oauth/token' element={<Items />} />
+					<Route exact path='/scan/:username' element={<Scan />} />
+				</Routes>
+			</Router>
+		</div>
+	);
 }
 
 export default App;

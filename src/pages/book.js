@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageView from '../Components/PageView';
 import Lottie from 'lottie-react'
 import lasertagLogo from "../lottie/loading.json"

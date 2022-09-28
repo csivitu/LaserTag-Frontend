@@ -1,3 +1,4 @@
+import React from 'react';
 import AboutLaserTag from '../Components/About';
 import ContactUs from "../Components/ContactUs";
 import Hero from '../Components/HeroSection';
