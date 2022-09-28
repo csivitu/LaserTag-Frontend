@@ -3,7 +3,7 @@ import Lottie from 'lottie-react';
 import lasertagLogo from '../lottie/loading.json';
 import { SlotTooltip } from './SlotTooltip';
 
-const SlotBooking = ({ slot, setSlot, day, slotData }) => {
+const SlotBooking = ({ slot, setSlot, day, slotData, selectedSlot }) => {
 	return (
 		<div className='overflow-y-auto grow'>
 			{/* <Pagination /> */}
@@ -17,9 +17,20 @@ const SlotBooking = ({ slot, setSlot, day, slotData }) => {
 			) : (
 				<div className='slots grid grid-cols-4 align-middle justify-items-center'>
 					{timeList.map((time, index) => (
-						<SlotTooltip day={day} index={index} slotData={slotData}>
+						<SlotTooltip
+							day={day}
+							index={index}
+							slotData={slotData}
+						>
 							<input
 								className='text-center'
+								style={
+									selectedSlot.day === day &&
+									selectedSlot.time ===
+										time.substring(0, 5) ? {
+										backgroundColor: '#1b5e20',
+									} : {}
+								}
 								key={index}
 								label={time}
 								type='radio'

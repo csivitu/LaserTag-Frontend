@@ -4,6 +4,7 @@ import Login from './Components/Login';
 import Items from './Components/oauth';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/landing';
+import Scan from './pages/Scan';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/book" element={<Book />} />
           <Route exact path="/login" element={<Login />} />
           <Route path="/oauth/token" element={<Items />} />
+          <Route path="/scan/:username" element={<Scan />} />
         </Routes>
         {/* <Routes>
           <Route exact path='/'>

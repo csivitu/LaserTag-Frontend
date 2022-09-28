@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
+import { BsFillCheckCircleFill, BsFillXCircleFill } from 'react-icons/bs';
 import DialogTitle from '@mui/material/DialogTitle';
 import {
 	Accordion,
@@ -11,22 +11,51 @@ import {
 	AccordionSummary,
 	Fab,
 } from '@mui/material';
+import { cancelSlot } from './axios';
+import { ToastContext } from './GlobalAlert';
+import Lottie from 'lottie-react';
+import lasertagLogo from '../lottie/loading.json';
 
-export const BookingInfo = ({ userData }) => {
-	const [open, setOpen] = useState(false);
+export const BookingInfo = ({ userData, setUserData }) => {
+	const [open, setOpen] = useState(true);
+	const [cancel, setCancel] = useState(false);
+	const { handleSnackOpen } = useContext(ToastContext);
 
 	const handleClose = () => {
 		setOpen(false);
 	};
 
 	const handleLogout = () => {
-		localStorage.removeItem('token');
-		window.location.href = '/';
+		handleSnackOpen({
+			message: 'Logged out successfully',
+			variant: 'success',
+		});
+
+		setTimeout(() => {
+			localStorage.removeItem('token');
+			window.location.href = '/';
+		}, 1000);
+	};
+
+	const handleSlotCancel = async () => {
+		const res = await cancelSlot();
+		if (res.success) {
+			setUserData(res.data);
+			handleSnackOpen({
+				message: 'Slot cancelled successfully',
+				variant: 'success',
+			});
+		} else {
+			handleSnackOpen({
+				message: `Error ${res.code}: ${res.message}`,
+				variant: 'error',
+			});
+		}
 	};
 
 	return (
 		<>
-			<div className='absolute top-1 md:top-5 right-1 md:right-5'>
+			<div className='fixed top-1 md:top-5 right-1 md:right-5'>
 				<Fab
 					color='primary'
 					aria-label='add'
@@ -52,11 +81,14 @@ export const BookingInfo = ({ userData }) => {
 				aria-describedby='alert-dialog-description'
 			>
 				<DialogTitle id='alert-dialog-title'>
-					<h2 className='m-0'>Information</h2>
+					<h2 className='m-0'>Hello there,</h2>
 				</DialogTitle>
 				<DialogContent>
-					{userData && (
-						<DialogContentText id='alert-dialog-description'>
+					{userData ? (
+						<div
+							className='flex flex-col gap-3 mb-5'
+							id='alert-dialog-description'
+						>
 							<div className='flex flex-col md:flex-row justify-center gap-2 items-start md:items-center'>
 								<img
 									src={`https://avatars.dicebear.com/api/bottts/${userData.username}.svg`}
@@ -74,7 +106,7 @@ export const BookingInfo = ({ userData }) => {
 										{userData.email}
 									</p>
 									<button
-										className='border-none py-0.5 px-2 cursor-pointer hover:bg-red-100 rounded-sm'
+										className='border-none py-0.5 px-2 cursor-pointer rounded-sm'
 										onClick={handleLogout}
 									>
 										Logout
@@ -82,12 +114,12 @@ export const BookingInfo = ({ userData }) => {
 								</div>
 							</div>
 							<div>
-								<p className='text-lg font-bold mb-0 text-white'>
+								<p className='text-lg font-bold m-0 text-white'>
 									Slot Details:
 								</p>
 								{userData.slotBooked ? (
 									<>
-										<p className='m-0'>
+										<p className='text-sm m-0'>
 											{getTime(
 												userData.slotBooked.startTime
 											)}
@@ -96,21 +128,116 @@ export const BookingInfo = ({ userData }) => {
 												userData.slotBooked.endTime
 											)}
 										</p>
-										<p className='mt-0'>
+										<p className='text-sm m-0'>
 											{getDate(
 												userData.slotBooked.startTime
 											)}
 										</p>
+										<div>
+											{!cancel ? (
+												<button
+													onClick={() =>
+														setCancel(true)
+													}
+													className='py-1 px-2 cursor-pointer rounded-md mt-2 mb-1 border-2 border-solid border-red-500 bg-red-50'
+												>
+													Cancel Slot
+												</button>
+											) : (
+												<div className='p-2 border-2 border-solid border-white w-fit rounded-lg'>
+													<p className='m-0'>
+														Are you sure you want to
+														cancel?
+													</p>
+													<button
+														className='mr-2 w-16 bg-green-700 my-2 text-white cursor-pointer border-none rounded-md py-1'
+														onClick={() =>
+															handleSlotCancel()
+														}
+													>
+														Yes
+													</button>
+													<button
+														className='mr-2 w-16 bg-red-700 my-2 text-white cursor-pointer border-none rounded-md py-1'
+														onClick={() =>
+															setCancel(false)
+														}
+													>
+														No
+													</button>
+												</div>
+											)}
+										</div>
+										<p className='text-xs m-0 text-stone-500'>
+											Note: You can only cancel a slot
+											once.
+										</p>
 									</>
 								) : (
-									<p className='mt-0'>
+									<p className='text-sm m-0'>
 										<i>Not booked yet!</i>
 									</p>
 								)}
 							</div>
-						</DialogContentText>
+							<div>
+								<p className='m-0 align-middle'>
+									<b className='text-white'>
+										Slot cancellation allowed:
+									</b>{' '}
+									{!userData.isChangedSlot ? (
+										<BsFillCheckCircleFill className='text-green-600 -mb-0.5' />
+									) : (
+										<BsFillXCircleFill className='text-red-500 -mb-0.5' />
+									)}
+								</p>
+								<p className='text-xs m-0 text-stone-500'>
+									Note: A maximum of one slot cancellation is
+									allowed up to 12 hours before the start of
+									the slot.
+								</p>
+							</div>
+							<div>
+								<p className='m-0 align-middle'>
+									<b className='text-white'>
+										Payment verified:
+									</b>{' '}
+									{userData.isPaid ? (
+										<BsFillCheckCircleFill className='text-green-600 -mb-0.5' />
+									) : (
+										<BsFillXCircleFill className='text-red-500 -mb-0.5' />
+									)}
+								</p>
+								<p className='text-xs m-0 text-stone-500'>
+									Note: You can book a slot only when your
+									payment is verified. The payment
+									verification is done manually from our end.
+								</p>
+							</div>
+						</div>
+					) : (
+						<div className='flex flex-col items-center justify-center h-full'>
+							<Lottie
+								animationData={lasertagLogo}
+								className='w-1/2'
+							/>
+							<p className='text-base md:text-lg -mt-3 md:-mt-5'>
+								Loading User Data...
+							</p>
+						</div>
 					)}
+					{userData && userData.qrCode && <Accordion>
+						<AccordionSummary
+							aria-controls='panel1a-content'
+							id='panel1a-header'
+							expandIcon={<ExpandMoreIcon />}
+						>
+							QR Code
+						</AccordionSummary>
 
+						<AccordionDetails>
+							<div dangerouslySetInnerHTML={{ __html: userData.qrCode }} />
+						</AccordionDetails>
+					</Accordion>}
 					<Accordion>
 						<AccordionSummary
 							aria-controls='panel1a-content'
@@ -175,7 +302,7 @@ export const BookingInfo = ({ userData }) => {
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose} autoFocus>
-						Okay
+						DONE
 					</Button>
 				</DialogActions>
 			</Dialog>

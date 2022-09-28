@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { generateErrorMessage } from '../util/generateErrorMessage';
 
 const headers = {
 	Authorization: localStorage.getItem('token'),
@@ -18,10 +19,12 @@ export const getUserInfo = async () => {
             userInfo: data.data.user,
         };
 	} catch (e) {
-		console.log(e.response);
+        console.log(e)
         return {
             success: false,
             error: e,
+            code: e.response.status,
+            message: generateErrorMessage(e),
         }
 	}
 };
@@ -34,10 +37,11 @@ export const getSlots = async () => {
             slots: data.data.slots,
         };
 	} catch (e) {
-		console.log(e.response);
         return {
             success: false,
             error: e,
+            code: e.response.status,
+            message: generateErrorMessage(e),
         }
 	}
 };
@@ -49,13 +53,51 @@ export const chooseSlot = async (slotId) => {
 		});
 		return {
             success: true,
-            data: data,
+            data: data.data.user,
         };
 	} catch (e) {
 		console.log(e.response);
         return {
             success: false,
             error: e,
+            code: e.response.status,
+            message: generateErrorMessage(e),
         }
 	}
 };
+
+export const cancelSlot = async () => {
+	try {
+		const { data } = await axiosInstance.post('/v1/app/cancelSlot');
+		return {
+            success: true,
+            data: data.data.user,
+        };
+	} catch (e) {
+		console.log(e.response);
+        return {
+            success: false,
+            error: e,
+            code: e.response.status,
+            message: generateErrorMessage(e),
+        }
+	}
+};
+
+export const scanQRCode = async (username) => {
+    try {
+		const { data } = await axiosInstance.post('/v1/admin/scan/' + username);
+		return {
+            success: true,
+            data: data.data.user,
+        };
+	} catch (e) {
+		console.log(e.response);
+        return {
+            success: false,
+            error: e,
+            code: e.response.status,
+            message: generateErrorMessage(e),
+        }
+	}
+}

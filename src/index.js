@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './css/index.css';
 import App from './App';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { ToastProvider } from './Components/GlobalAlert';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -15,7 +16,9 @@ const darkTheme = createTheme({
 root.render(
 	// <React.StrictMode>
 	<ThemeProvider theme={darkTheme}>
-		<App />
+		<ToastProvider>
+			<App />
+		</ToastProvider>
 	</ThemeProvider>
 	// </React.StrictMode>
 );
