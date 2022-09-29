@@ -7,6 +7,7 @@ import Landing from './pages/landing';
 import Scan from './pages/Scan';
 import Admin from './pages/admin';
 import Logout from './pages/logout';
+import PageNotFound from './pages/404';
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 					<Route exact path='/scan/:username' element={<Scan />} />
 					<Route exact path='/admin' element={<Admin />} />
 					<Route exact path='/logout' element={<Logout />} />
+					<Route path='*' element={<PageNotFound />} />
 				</Routes>
 			</Router>
 		</div>
