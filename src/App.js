@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/landing';
 import Scan from './pages/Scan';
 import Admin from './pages/admin';
+import Logout from './pages/logout';
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 					<Route exact path='/oauth/token' element={<Items />} />
 					<Route exact path='/scan/:username' element={<Scan />} />
 					<Route exact path='/admin' element={<Admin />} />
+					<Route exact path='/logout' element={<Logout />} />
 				</Routes>
 			</Router>
 		</div>
