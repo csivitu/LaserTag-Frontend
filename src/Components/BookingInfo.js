@@ -146,7 +146,7 @@ export const BookingInfo = ({ userData, getAllData }) => {
 											).toDateString()}
 										</p>
 										<p className='text-sm m-0'>
-											<b>Venue: </b>Mahatma Gandhi Block Auditorium F420
+											<b>Venue: </b>SJT 308
 										</p>
 										<div>
 											{!cancel ? (

@@ -11,8 +11,7 @@ export const processSlotData = (slots) => {
 		return {
 			...slot,
 			startTimeStr: getTime(slot.startTime),
-			endTimeStr: getTime(slot.endTime),
-			day: getDay(slot.startTime),
+			endTimeStr: getTime(slot.endTime)
 		};
 	});
 
@@ -52,5 +51,7 @@ export const getTime = (date) => {
 };
 
 export const getDay = (date) => {
-	return new Date(date).getDate() === 30 ? 0 : new Date(date).getDate();
+	const day = new Date(date)
+		.toLocaleDateString('en-US', { day: '2-digit', timeZone: 'IST' });
+	return ['30', '01', '02'].indexOf(day);
 };

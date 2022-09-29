@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { processSlotData } from '../util/processSlotData';
-import './../css/App.css';
 import { chooseSlot, getSlots, getUserInfo } from './axios';
 import { BookingInfo } from './BookingInfo';
 import DatePicker from './Calender';
