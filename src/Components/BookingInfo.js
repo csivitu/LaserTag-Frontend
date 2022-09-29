@@ -87,12 +87,12 @@ export const BookingInfo = ({ userData, getAllData }) => {
 			>
 				<DialogTitle id='alert-dialog-title'>
 					<div className='flex items-end'>
-					<img
-						src='/images/hello-there.svg'
-						alt='Hello There'
-						className='h-6 mr-2 mb-3'
-					/>
-					<h2 className='m-0'>Hello there.</h2>
+						<img
+							src='/images/hello-there.svg'
+							alt='Hello There'
+							className='h-6 mr-2 mb-3'
+						/>
+						<h2 className='m-0'>Hello there.</h2>
 					</div>
 				</DialogTitle>
 				<DialogContent>
@@ -132,7 +132,7 @@ export const BookingInfo = ({ userData, getAllData }) => {
 								{userData.slotBooked ? (
 									<>
 										<p className='text-sm m-0'>
-											{getTime(
+										<b>Time: </b>{getTime(
 												userData.slotBooked.startTime
 											)}
 											{' - '}
@@ -141,9 +141,12 @@ export const BookingInfo = ({ userData, getAllData }) => {
 											)}
 										</p>
 										<p className='text-sm m-0'>
-											{new Date(
+										<b>Date: </b>{new Date(
 												userData.slotBooked.startTime
 											).toDateString()}
+										</p>
+										<p className='text-sm m-0'>
+											<b>Venue: </b>Mahatma Gandhi Block Auditorium F420
 										</p>
 										<div>
 											{!cancel ? (
@@ -286,13 +289,9 @@ export const BookingInfo = ({ userData, getAllData }) => {
 						<AccordionDetails>
 							<ol className='m-0'>
 								<li>
-									Click on the link provided above and login
-									using your CSI account.
-								</li>
-								<li>
-									If you don’t have a CSI account already,
-									create one using the email used for event
-									registration.
+									Make sure you use the same email address as
+									the one used for registering on the Gravitas
+									Portal.
 								</li>
 								<li>
 									Available slots will be shown on your
@@ -300,10 +299,16 @@ export const BookingInfo = ({ userData, getAllData }) => {
 								</li>
 								<li>Choose your preferred date and time.</li>
 								<li>
-									Click on ‘Confirm’ to confirm your slot.
+									Click on ‘Confirm Booking’ to confirm your
+									slot.
 								</li>
 								<li>
-									Report 5 minutes prior to the starting of
+									Your slot details will be mailed to you
+									along with a QR code. Please show the QR
+									code to the slot manager.
+								</li>
+								<li>
+									Report 5-10 minutes prior to the starting of
 									your slot.
 								</li>
 							</ol>
@@ -327,6 +332,11 @@ export const BookingInfo = ({ userData, getAllData }) => {
 								<li>
 									You won’t be allowed to play if your slot
 									hasn’t been booked.
+								</li>
+								<li>
+									The QR code can only be scanned once. Please
+									refrain from sharing the QR code with
+									anybody.
 								</li>
 								<li>Latecomers won’t be allowed to play.</li>
 								<li>

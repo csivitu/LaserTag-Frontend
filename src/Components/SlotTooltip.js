@@ -1,13 +1,13 @@
 import { Tooltip } from '@mui/material';
 import Zoom from '@mui/material/Zoom';
 
-export const SlotTooltip = ({ slotDetails, children, ...props }) => {
+export const SlotTooltip = ({ day, slotDetails, children, ...props }) => {
 	return (
 		<Tooltip
 			title={
 				<>
 					<p className='text-sm text-center'>
-						<b>{10 - slotDetails.slotBookedBy.length}</b> seats
+						<b>{[10, 20, 20][day] - slotDetails.slotBookedBy.length}</b> seats
 						left.
 					</p>
 					<p className='font-bold mb-1'>Slot booked by:</p>
