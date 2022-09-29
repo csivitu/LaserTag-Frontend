@@ -4,7 +4,7 @@ export const generateErrorMessage = (e) => {
 	if (code === 429) {
 		return 'Too many requests. Try after 15 minutes!';
 	} else if (code >= 500) {
-		return 'Unkown server error.';
+		return 'Unknown server error.';
 	} else if (e.response.data) {
 		return e.response.data.error.message;
 	} else {
