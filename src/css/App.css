@@ -1,0 +1,138 @@
+.pageView{
+    display: flex;
+    position: absolute;
+    min-width: 70%;
+    min-height: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 7.5%;
+    margin-bottom: 7.5%;
+    border-radius: 12px;
+    background-color: #212121;
+    
+}
+
+.pageViewBlur{
+    display: flex;
+}
+
+.dateView{
+    min-width: 50%;
+}
+
+.slotView{
+    min-width: 50%;
+}
+
+.about{
+    margin-left: 5%;
+}
+
+.about p{
+    font-weight: 600;
+    font-size: 32px;
+    color: #4F4F4F;
+}
+
+.topic p{
+    font-weight: 600;
+    font-size: 32px;
+    color: #4F4F4F;
+}
+
+
+.dateinfo{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.day{
+    font-size: 20px;
+    font-weight: 300;
+    color: #FFFFFF;
+}
+
+.date{
+    font-size: 20px;
+    font-weight: 300;
+    color: #4F4F4F;
+}
+
+
+
+.slots {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-width: 400px;
+}
+
+.slots input {
+    appearance: none;
+    cursor: pointer;
+    border-radius: 2px;
+    padding-top: 5px;
+    padding-left: 3px;
+    background: #2B2B2B;
+    color: #FFFFFF;
+    font-size: 15px;
+    width: 95px;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border-radius: 6px;
+    border-style: none;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .slots input:hover {
+    background: rgb(67, 92, 116);
+  }
+
+  .slots input:checked {
+    background: #65A7FFD1;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 0px #808080;
+  }
+
+  .Book{
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: #FAFAFA;
+    width: 175px;    
+    padding-left: 10px;
+    color: #212121;
+    border-style: none;
+    height: 50px;
+    cursor: pointer;
+    margin-top: 10%;
+    left: 70%;
+}
+.Book p {
+    margin-right: 10px;
+}
+
+.Book:hover{
+    background-color: #2a5388d1;
+}
+
+  .slots input::before {
+    content: attr(label);
+    margin-right:14px;
+    margin-left: 14px;
+    padding-top: 13px; 
+    display: inline-block;
+  }
+
+@media (max-width:800px) {
+    .pageView{
+        flex-direction: column;
+    }
+}
