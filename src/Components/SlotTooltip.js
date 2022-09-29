@@ -46,7 +46,9 @@ export const SlotTooltip = ({ day, slotDetails, children, ...props }) => {
 			enterTouchDelay={0}
 			{...props}
 		>
-			{children}
+			<div style={{
+				opacity: slotDetails.slotBookedBy.length === [10, 20, 20][day] ? 0.3 : 1
+			}}>{children}</div>
 		</Tooltip>
 	);
 };
