@@ -34,7 +34,7 @@ const Scan = () => {
 			const res = await scanQRCode(username);
 			if (res.success) {
 				setMessage('Scan successful!');
-				setUserData(res.data);
+				getUserData();
 				setCode(null);
 			} else {
 				setCode(res.code);
