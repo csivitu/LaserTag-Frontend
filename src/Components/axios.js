@@ -105,3 +105,21 @@ export const scanQRCode = async (username) => {
         }
 	}
 }
+
+export const getAllData = async() => {
+    try {
+        const { data } = await axiosInstance.get('v1/admin/users');
+        return {
+            success: true,
+            data: data.data.users,
+        }
+    }
+    catch (e) {
+        return {
+            success: false,
+            error: e,
+            code: e.response.status,
+            message: generateErrorMessage(e),
+        }
+    }
+}
