@@ -83,6 +83,12 @@ const Scan = () => {
 							<p className='my-1 break-all'>
 								{userData.username}
 							</p>
+							<p className='my-1 break-all'>
+								{userData.isPaid? 'Paid' : 'Not Paid'}
+							</p>
+							<p className='my-1 break-all'>
+								{userData.isScanned? 'Scanned' : 'Not Scanned'}
+							</p>
 							<h3 className='my-2'>Slot Details:</h3>
 							{userData.slotBooked ? (
 								<>
