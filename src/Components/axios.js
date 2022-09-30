@@ -160,3 +160,24 @@ export const adminCancelSlot = async (username) => {
     };
   }
 };
+
+export const adminBookSlot = async (slotId,username) => {
+  try {
+    const { data } = await axiosInstance.post("v1/admin/slots",{
+      username: username, slotId: slotId,
+    }); 
+      return {
+      success: true,
+      data: data.data.user,
+    }
+  }
+  catch (e) {
+    console.log(e);
+    return {
+      success: false,
+      error: e,
+      code: e.response.status,
+      message: generateErrorMessage(e),
+    }
+  }
+}

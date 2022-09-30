@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import PageView from '../Components/PageView';
-import Lottie from 'lottie-react'
-import lasertagLogo from "../lottie/loading.json"
+import React, { useState, useEffect, useContext } from 'react';
+import Lottie from 'lottie-react';
+import { useParams } from 'react-router-dom';
+import lasertagLogo from "../lottie/loading.json";
 import { ToastContext } from '../Components/GlobalAlert';
+import { adminBookSlot, chooseSlot, getSlots, getUserInfo } from '../Components/axios';
+import SlotBooking from '../Components/SlotBooking';
+import DatePicker from '../Components/Calender';
+import { BookingInfo } from '../Components/BookingInfo';
+import { customErrorCodes } from '../util/customErrorCodes';
+import { processSlotData } from '../util/processSlotData';
 
-function adminBook() {
+function AdminBook() {
     const [viewport, setViewPort] = useState(false);
+    const { username } = useParams();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -31,7 +38,9 @@ function adminBook() {
 	const handleSlotBooking = async () => {
 		setDisableButton(true);
 
-		const res = await chooseSlot(slot);
+		const res = await adminBookSlot(slot,username);
+        console.log(username);
+        console.log(slot);
 		if (res.success) {
 			setUserData(res.data);
 			handleSnackOpen({
@@ -178,4 +187,4 @@ function adminBook() {
     );
 }
 
-export default adminBook;
+export default AdminBook;

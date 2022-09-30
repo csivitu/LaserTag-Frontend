@@ -12,6 +12,7 @@ import {
 import AdminUserDetails from '../Components/AdminUserDetails';
 
 const Admin = () => {
+    const [view,setView] = useState(false);
 	const [errorMesaage, setErrorMessage] = useState('');
 	const [errorCode, setErrorCode] = useState(0);
 	const [info, setInfo] = useState([]);
@@ -56,9 +57,11 @@ const Admin = () => {
 			if (res.success) {
 				setInfo(res.data);
 				setFilteredInfo(res.data);
+                setView(true);
 			} else {
 				setErrorCode(res.code);
 				setErrorMessage(res.message);
+                setView(false);
 			}
 		};
 		getRequest();
@@ -71,7 +74,7 @@ const Admin = () => {
 						<div className='flex gap-2'>
 							<input
 								id='search-input'
-								placeholder='Serach for anything'
+								placeholder='Search for anything'
 								className='border-1 border-solid border-white w-full bg-stone-900 text-white outline-none rounded-md px-2'
 								value={search}
 								onChange={(e) => setSearch(e.target.value)}
@@ -119,19 +122,23 @@ const Admin = () => {
 					</div>
 				</>
 			)}
-			{errorCode ? (
-				<>
+			{view ? (
+				null
+			) : (
+                errorCode?(
+                    <>
 					<h1 className='my-2'>{errorCode}</h1>
 					<p className='my-2 text-center max-w-xl'>{errorMesaage}</p>
 				</>
-			) : (
-				<>
+                ):(
+                    <>
 					<Lottie
 						animationData={lasertagLogo}
 						className='w-full sm:w-3/5 md:w-1/4'
 					/>
 					<p className='text-lg -mt-5'>Loading... Please wait</p>
 				</>
+                )
 			)}
 		</div>
 	);

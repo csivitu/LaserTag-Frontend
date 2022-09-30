@@ -149,7 +149,6 @@ const PageView = () => {
 					<p className='text-stone-500 mb-2'>Contact Us if the issue is not resolved.</p>
 					<a className="mb-1" href='mailto:askcsivit@gmail.com'>askcsivit@gmail.com</a>
 					<a className="mb-1" href='tel:+918764252221'>+91 87642 52221</a>
-					<a className="mb-1" href='tel:+919304917126'>+91 93049 17126</a>
 					<a className="mb-1" href='tel:+919910158496'>+91 99101 58496</a>
 					<a className="mb-1" href='tel:+919650021699'>+91 96500 21699</a>
 				</div>

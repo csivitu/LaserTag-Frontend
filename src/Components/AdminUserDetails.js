@@ -21,7 +21,7 @@ const AdminUserDetails = ({ user, key }) => {
 			});
 			setTimeout(() => {
 				window.location.reload();
-			}, 2000);
+			}, );
 		} else {
 			handleSnackOpen({
 				message: `Error ${res.code}: ${res.message}`,
