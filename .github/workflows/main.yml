@@ -17,4 +17,4 @@ jobs:
       - name: Build
         run: npm i && DISABLE_ESLINT_PLUGIN=true npm run build
       - name: Deploy with rsync
-        run: rsync -avzr --delete ./build ${{ secrets.USER }}@${{ secrets.HOST }}:~/test
+        run: rsync -avzr --delete ./build ${{ secrets.USER }}@${{ secrets.HOST }}:~/test/LaserTag-Frontend
