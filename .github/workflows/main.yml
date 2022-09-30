@@ -15,6 +15,6 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
       - name: Build
-        run: npm i && DISABLE_ESLINT_PLUGIN=true REACT_APP_REDIRECT_URL=${{ secrets.REACT_APP_REDIRECT_URL }} REACT_APP_ACCOUNTS_URL=${{ REACT_APP_ACCOUNTS_URL }} REACT_APP_CLIENT_ID=${{ REACT_APP_CLIENT_ID }} REACT_APP_CLIENT_NAME=${{ REACT_APP_CLIENT_NAME }} REACT_APP_BACKEND_BASE_URL=${{ REACT_APP_BACKEND_BASE_URL }} npm run build
+        run: npm i && DISABLE_ESLINT_PLUGIN=true REACT_APP_REDIRECT_URL=${{ secrets.REACT_APP_REDIRECT_URL }} REACT_APP_ACCOUNTS_URL=${{ secrets.REACT_APP_ACCOUNTS_URL }} REACT_APP_CLIENT_ID=${{ secrets.REACT_APP_CLIENT_ID }} REACT_APP_CLIENT_NAME=${{ secrets.REACT_APP_CLIENT_NAME }} REACT_APP_BACKEND_BASE_URL=${{ secrets.REACT_APP_BACKEND_BASE_URL }} npm run build
       - name: Deploy with rsync
         run: rsync -avzr --delete ./build ${{ secrets.USER }}@${{ secrets.HOST }}:~/test/LaserTag-Frontend
