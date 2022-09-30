@@ -1,3 +1,5 @@
+import { staticSlots } from "../Components/generateSlotData";
+
 export const processSlotData = (slots) => {
 	if (!slots || !slots.length) return { 0: {}, 1: {}, 2: {} };
 
@@ -33,6 +35,11 @@ export const findSlot = (slotsData, id) => {
 
 	return allSlots.find((e) => e._id === id);
 };
+
+// Temporary function to find slots
+export const findStaticSlot = (id) => {
+	return staticSlots.find((e) => e._id === id);
+}
 
 export const getTimeSlots = (slots) => {
 	const keys = Object.keys(slots);

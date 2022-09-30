@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { findSlot } from '../util/processSlotData';
+import { ToastContext } from './GlobalAlert';
 
 export default function DatePicker({
 	day,
@@ -7,6 +9,7 @@ export default function DatePicker({
 	selectedSlot,
 }) {
 	const selectedSlotDetails = findSlot(slotsDataPro, selectedSlot);
+	const { handleSnackOpen } = useContext(ToastContext);
 	
 	return (
 		<>
@@ -65,7 +68,13 @@ export default function DatePicker({
 				{[0, 1, 2].map((e, index) => (
 					<div
 						className='py-3 cursor-pointer w-5/6 align-middle text-center rounded-lg box-border'
-						onClick={() => setDay(e)}
+						onClick={() => {
+							e !== 0 && e !== 1 ? handleSnackOpen({
+								message: `Warning: At present, slot booking is available for Day 1 and 2 only.`,
+								variant: 'warning',
+							}) : 
+							setDay(e);
+						}}
 						key={index}
 						style={{
 							backgroundColor:

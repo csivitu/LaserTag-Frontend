@@ -348,7 +348,8 @@ export const BookingInfo = ({ userData, getAllData }) => {
 					</Accordion>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose}>DONE</Button>
+					<Button onClick={handleLogout} variant="contained" color="error">LOGOUT</Button>
+					<Button onClick={handleClose} variant="contained">DONE</Button>
 				</DialogActions>
 			</Dialog>
 		</>

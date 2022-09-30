@@ -106,6 +106,26 @@ export const scanQRCode = async (username) => {
 	}
 }
 
+export const adminGetUserInfo = async (username) => {
+	try {
+		const { data } = await axiosInstance.get('/v1/admin/userInfo/' + username);
+
+		return {
+            success: true,
+            userInfo: data.data.user,
+        };
+        
+	} catch (e) {
+        console.log(e)
+        return {
+            success: false,
+            error: e,
+            code: e.response.status,
+            message: generateErrorMessage(e),
+        }
+	}
+};
+
 export const getAllData = async() => {
     try {
         const { data } = await axiosInstance.get('v1/admin/users');
