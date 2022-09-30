@@ -15,13 +15,4 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
       - name: Deploy with rsync
-        run: rsync -avzr --delete --exclude 'node_modules' --exclude '.env' --exclude 'build' ./ ${{ secrets.USER }}@${{ secrets.HOST }}:~/LaserTag-Frontend/
-      - name: starting on Server
-        uses: appleboy/ssh-action@master
-        with: 
-              host: ${{ secrets.HOST }}
-              username: ${{ secrets.USER }}
-              key: ${{ secrets.OPENSSH_PRIVATE_KEY }}
-              script: |
-                cd LaserTag-Frontend
-                
+        run: npm i && npm run build && rsync -avzr --delete ./build ${{ secrets.USER }}@${{ secrets.HOST }}:~/test2
