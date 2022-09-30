@@ -6,7 +6,7 @@ import { adminCancelSlot } from "./axios";
 import { ToastContext } from "./GlobalAlert";
 import { useContext } from "react";
 
-const AdminUserDetails = ({ user, key }) => {
+const AdminUserDetails = ({ user, index }) => {
 	const { handleSnackOpen } = useContext(ToastContext);
 	const handleBook = () => {
 		window.location.href = `/admin/book/${user.username}`;
@@ -30,7 +30,7 @@ const AdminUserDetails = ({ user, key }) => {
 		}
 	};
   return (
-    <Accordion key={key}>
+    <Accordion key={index}>
       <AccordionSummary
         expandIcon={<FaChevronDown />}
         aria-controls="panel1a-content"
