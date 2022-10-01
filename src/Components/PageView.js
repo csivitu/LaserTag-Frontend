@@ -61,7 +61,7 @@ const PageView = () => {
     // } else {
     handleSnackOpen({
     //   message: `Error ${slotRes.code}: ${slotRes.message}`,
-      message: `Error : `,
+      message: `Slot Booking is currently down for maintenance. Please try again later.`,
       variant: "error",
     });
     // }
