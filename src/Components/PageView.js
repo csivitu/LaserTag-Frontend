@@ -23,7 +23,7 @@ const PageView = () => {
 
 		const res = await chooseSlot(slot);
 		if (res.success) {
-			setUserData(res.data);
+			// setUserData(res.data);
 			handleSnackOpen({
 				message: 'Slot booked successfully',
 				variant: 'success',
