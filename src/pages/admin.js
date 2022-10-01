@@ -48,7 +48,8 @@ const Admin = () => {
     return (
       user.username.toLowerCase().includes(search.toLowerCase()) ||
       user.name.toLowerCase().includes(search.toLowerCase()) ||
-      user.email.toLowerCase().includes(search.toLowerCase())
+      user.email.toLowerCase().includes(search.toLowerCase()) ||
+      user.slotBooked?._id.toLowerCase().includes(search.toLowerCase())
     );
   };
 

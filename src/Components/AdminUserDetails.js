@@ -19,9 +19,6 @@ const AdminUserDetails = ({ user, index }) => {
 				message: 'Slot cancelled successfully',
 				variant: 'success',
 			});
-			setTimeout(() => {
-				window.location.reload();
-			}, );
 		} else {
 			handleSnackOpen({
 				message: `Error ${res.code}: ${res.message}`,

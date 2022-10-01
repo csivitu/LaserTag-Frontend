@@ -8,7 +8,7 @@ export const SlotTooltip = ({ day, slotDetails, children, ...props }) => {
 				<>
 					<p className='text-sm text-center'>
 						<b>{[10, 20, 20][day] - slotDetails.slotBookedBy.length}</b> seats
-						left.
+						left. id: {slotDetails._id}
 					</p>
 					<p className='font-bold mb-1'>Slot booked by:</p>
 					{slotDetails.slotBookedBy.length > 0 ? (
@@ -41,7 +41,6 @@ export const SlotTooltip = ({ day, slotDetails, children, ...props }) => {
 				},
 			}}
 			arrow
-			disableInteractive
 			TransitionComponent={Zoom}
 			enterTouchDelay={0}
 			{...props}
