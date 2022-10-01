@@ -23,7 +23,7 @@ const PageView = () => {
 
     const res = await chooseSlot(slot);
     if (res.success) {
-      // setUserData(res.data);
+      setUserData(res.data);
       handleSnackOpen({
         message: "Slot booked successfully",
         variant: "success",
@@ -61,7 +61,6 @@ const PageView = () => {
     } else {
       handleSnackOpen({
         message: `Error ${slotRes.code}: ${slotRes.message}`,
-        message: `Slot Booking is currently down for maintenance. Please try again later.`,
         variant: "error",
       });
     }
