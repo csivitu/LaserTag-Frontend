@@ -21,19 +21,19 @@ const PageView = () => {
   const handleSlotBooking = async () => {
     setDisableButton(true);
 
-    // const res = await chooseSlot(slot);
-    // if (res.success) {
-    // 	// setUserData(res.data);
-    // 	handleSnackOpen({
-    // 		message: 'Slot booked successfully',
-    // 		variant: 'success',
-    // 	});
-    // } else {
-    // 	handleSnackOpen({
-    // 		message: `Error ${res.code}: ${res.message}`,
-    // 		variant: 'error',
-    // 	});
-    // }
+    const res = await chooseSlot(slot);
+    if (res.success) {
+      // setUserData(res.data);
+      handleSnackOpen({
+        message: "Slot booked successfully",
+        variant: "success",
+      });
+    } else {
+      handleSnackOpen({
+        message: `Error ${res.code}: ${res.message}`,
+        variant: "error",
+      });
+    }
     await getAllData();
     setDisableButton(false);
   };
@@ -56,15 +56,15 @@ const PageView = () => {
     }
 
     const slotRes = await getSlots();
-    // if (slotRes.success) {
-    // 	setSlotsDataPro(processSlotData(slotRes.slots));
-    // } else {
-    handleSnackOpen({
-    //   message: `Error ${slotRes.code}: ${slotRes.message}`,
-      message: `Slot Booking is currently down for maintenance. Please try again later.`,
-      variant: "error",
-    });
-    // }
+    if (slotRes.success) {
+      setSlotsDataPro(processSlotData(slotRes.slots));
+    } else {
+      handleSnackOpen({
+        message: `Error ${slotRes.code}: ${slotRes.message}`,
+        message: `Slot Booking is currently down for maintenance. Please try again later.`,
+        variant: "error",
+      });
+    }
   };
 
   useEffect(() => {
