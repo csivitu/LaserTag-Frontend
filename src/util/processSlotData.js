@@ -1,4 +1,4 @@
-import { staticSlots } from "../Components/generateSlotData";
+import { staticSlots } from '../Components/generateSlotData';
 
 export const processSlotData = (slots) => {
 	if (!slots || !slots.length) return { 0: {}, 1: {}, 2: {} };
@@ -13,11 +13,27 @@ export const processSlotData = (slots) => {
 		return {
 			...slot,
 			startTimeStr: getTime(slot.startTime),
-			endTimeStr: getTime(slot.endTime)
+			endTimeStr: getTime(slot.endTime),
 		};
 	});
 
 	slots.forEach((slot) => {
+		// Removes all the slots for Day 2 from 6:00 PM onwards
+		if (
+			slot.day === 2 &&
+			[
+				'06:00 PM',
+				'06:15 PM',
+				'06:30 PM',
+				'06:45 PM',
+				'07:00 PM',
+				'07:15 PM',
+				'07:30 PM',
+				'07:45 PM',
+			].includes(slot.startTimeStr)
+		)
+			return;
+		
 		slotsData[slot.day][slot.startTimeStr] = slot;
 	});
 
@@ -39,7 +55,7 @@ export const findSlot = (slotsData, id) => {
 // Temporary function to find slots
 export const findStaticSlot = (id) => {
 	return staticSlots.find((e) => e._id === id);
-}
+};
 
 export const getTimeSlots = (slots) => {
 	const keys = Object.keys(slots);
@@ -58,7 +74,9 @@ export const getTime = (date) => {
 };
 
 export const getDay = (date) => {
-	const day = new Date(date)
-		.toLocaleDateString('en-US', { day: '2-digit', timeZone: 'IST' });
+	const day = new Date(date).toLocaleDateString('en-US', {
+		day: '2-digit',
+		timeZone: 'IST',
+	});
 	return ['30', '01', '02'].indexOf(day);
 };
