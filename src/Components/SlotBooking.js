@@ -19,6 +19,7 @@ const SlotBooking = ({ slot, setSlot, day, slotsDataPro, selectedSlot }) => {
 			) : (
 				<div className='slots grid grid-cols-4 align-middle justify-items-center'>
 					{slotsForTheDay.map((time, index) => (
+						// Removing all Slots from 6 to 8 for Day index 2
 						!(day === 2 &&
 						[
 							'06:00 PM',

@@ -7,8 +7,19 @@ export const SlotTooltip = ({ day, slotDetails, children, ...props }) => {
 			title={
 				<>
 					<p className='text-sm text-center'>
-						<b>{[10, 20, 20][day] - slotDetails.slotBookedBy.length}</b> seats
-						left. id: {slotDetails._id}
+						<b>
+							{[10, 20, 20][day] -
+								slotDetails.slotBookedBy.length <
+							0
+								? 0
+								: [10, 20, 20][day] -
+								  slotDetails.slotBookedBy.length}
+						</b>{' '}
+						seats left.
+					</p>
+					<p>
+						<b>Slot ID: </b>
+						{slotDetails._id}
 					</p>
 					<p className='font-bold mb-1'>Slot booked by:</p>
 					{slotDetails.slotBookedBy.length > 0 ? (
@@ -45,9 +56,16 @@ export const SlotTooltip = ({ day, slotDetails, children, ...props }) => {
 			enterTouchDelay={0}
 			{...props}
 		>
-			<div style={{
-				opacity: slotDetails.slotBookedBy.length === [10, 20, 20][day] ? 0.3 : 1
-			}}>{children}</div>
+			<div
+				style={{
+					opacity:
+						slotDetails.slotBookedBy.length >= [10, 20, 20][day]
+							? 0.3
+							: 1,
+				}}
+			>
+				{children}
+			</div>
 		</Tooltip>
 	);
 };
