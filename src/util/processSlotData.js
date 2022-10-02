@@ -19,20 +19,20 @@ export const processSlotData = (slots) => {
 
 	slots.forEach((slot) => {
 		// Removes all the slots for Day 2 from 6:00 PM onwards
-		if (
-			slot.day === 2 &&
-			[
-				'06:00 PM',
-				'06:15 PM',
-				'06:30 PM',
-				'06:45 PM',
-				'07:00 PM',
-				'07:15 PM',
-				'07:30 PM',
-				'07:45 PM',
-			].includes(slot.startTimeStr)
-		)
-			return;
+		// if (
+		// 	slot.day === 2 &&
+		// 	[
+		// 		'06:00 PM',
+		// 		'06:15 PM',
+		// 		'06:30 PM',
+		// 		'06:45 PM',
+		// 		'07:00 PM',
+		// 		'07:15 PM',
+		// 		'07:30 PM',
+		// 		'07:45 PM',
+		// 	].includes(slot.startTimeStr)
+		// )
+		// 	return;
 		
 		slotsData[slot.day][slot.startTimeStr] = slot;
 	});

@@ -19,7 +19,17 @@ const SlotBooking = ({ slot, setSlot, day, slotsDataPro, selectedSlot }) => {
 			) : (
 				<div className='slots grid grid-cols-4 align-middle justify-items-center'>
 					{slotsForTheDay.map((time, index) => (
-						<SlotTooltip
+						!(day === 2 &&
+						[
+							'06:00 PM',
+							'06:15 PM',
+							'06:30 PM',
+							'06:45 PM',
+							'07:00 PM',
+							'07:15 PM',
+							'07:30 PM',
+							'07:45 PM',
+						].includes(time)) && <SlotTooltip
 							day={day}
 							slotDetails={slotsDataPro[day][time]}
 							key={index}
